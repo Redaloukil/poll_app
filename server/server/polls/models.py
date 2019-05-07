@@ -12,3 +12,4 @@ class PollChoice(BaseModel):
     poll = models.OneToOneField(Poll , on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     desc = models.CharField(max_length=255)
+    count = models.IntegerField()
