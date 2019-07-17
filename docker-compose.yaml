@@ -1,0 +1,22 @@
+version: '2'
+services:
+  
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: ./compose/Dockerfile
+    volumes:
+      - ./backend:/src/app
+    ports:
+      - "4000:4000"
+
+  # frontend:
+  #   build:
+  #     context: ./frontend/
+  #     dockerfile: ./compose/Dockerfile
+  #   volumes:
+  #     - ./frontend:/src/app
+  #   depends_on:
+  #     - backend
+  #   ports:
+  #     - "3000:3000"
