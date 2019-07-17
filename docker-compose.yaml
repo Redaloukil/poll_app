@@ -3,7 +3,7 @@ services:
   
   backend:
     build:
-      context: ./backend/
+      context: ./server/
       dockerfile: ./compose/Dockerfile
     volumes:
       - ./backend:/src/app
