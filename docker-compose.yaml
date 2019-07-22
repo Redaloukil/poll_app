@@ -1,12 +1,20 @@
 version: '2'
 services:
+  mongo:
+    image: mongo
+    ports:
+    - "27017:27017"
   
   backend:
     build:
       context: ./server/
       dockerfile: ./compose/Dockerfile
     volumes:
-      - ./backend:/src/app
+      - ./server:/src/app
+    depends_on: 
+     - mongo 
+    environment:
+     - MONGODB_URI=mongodb://mongo:27017/poll 
     ports:
       - "4000:4000"
 

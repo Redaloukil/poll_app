@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+  
   email: { type: String, unique: true },
   
   password: String,
@@ -42,6 +43,13 @@ userSchema.pre('save', function save(next) {
   });
 });
 
+
+
+userSchema.methods.generateToken = function generateToken(){
+  return jwt.sign({ _id: this._id }, Constants.security.sessionSecret, {
+    expiresIn: Constants.security.sessionExpiration,
+  });
+}
 /**
  * Helper method for validating user's password.
  */
@@ -64,6 +72,11 @@ userSchema.methods.gravatar = function gravatar(size) {
   const md5 = crypto.createHash('md5').update(this.email).digest('hex');
   return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
 };
+
+
+userSchema.methods.authenticate = (password) => {
+
+}
 
 const User = mongoose.model('User', userSchema);
 

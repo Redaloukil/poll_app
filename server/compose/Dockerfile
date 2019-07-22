@@ -1,10 +1,17 @@
-FROM node:8
+FROM node:8-slim
 
-RUN mkdir -p /src/app
-WORKDIR /src/app
+WORKDIR /app
 
-RUN npm install -g nodemon
+ENV NODE_ENV development
 
-CMD [ "npm", "start" ]
+COPY package.json /app/package.json
 
-EXPOSE 4000 
+RUN npm install --production
+
+COPY .env.example /app/.env.example
+
+COPY . /app
+
+CMD ["npm","start"]
+
+EXPOSE 4000
