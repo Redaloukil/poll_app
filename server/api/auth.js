@@ -3,9 +3,9 @@ const User = require('../models/User');
 
 //login 
 exports.loginApi = async (req , res , next ) => {
-    const validationErrors = {};
     
     const {email , password} = req.body;
+    console.log(email , password);
     try {
         const user = await User.findOne({ email })
         if (!user || user.comparePassword(password)){
@@ -16,7 +16,7 @@ exports.loginApi = async (req , res , next ) => {
         const token = user.generateToken();
       return res.status(200).json({ token });
     }catch (err) {
-      next(err);next(err);
+      next(err);
     }
 }
     

@@ -1,7 +1,7 @@
 
 //Api entry point 
-exports.apiEntry = async (req , res , next ) => {
-    await res.status(200).json({ hello : "hello world" });
+exports.apiEntry = (req , res , next ) => {
+    res.status(200).json({ hello : "hello world" });
 }
     
     

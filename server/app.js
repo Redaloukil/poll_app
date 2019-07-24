@@ -137,7 +137,7 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
 //  */
 app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
-// // app.post('/login', userController.postLogin);
+app.post('/login', userController.postLogin);
 // app.get('/logout', userController.logout);
 // app.get('/forgot', userController.getForgot);
 // app.post('/forgot', userController.postForgot);
@@ -152,8 +152,8 @@ app.get('/login', userController.getLogin);
 /**
  * Rest Api endpoints.
  */
-
-// app.get('/services/api', );
+app.get('/api/',restApiControllers.apiEntry);
+app.post('/api/login',lusca({ csrf: false }),authRestApiControllers.loginApi );
 
 
 /**
@@ -166,7 +166,7 @@ app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
 app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
 
 
-app.get('services/api/' , restApiControllers.apiEntry);
+
 
 
 /**
