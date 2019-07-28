@@ -5,6 +5,7 @@ import {
 } from './../../constants/actionTypes';
 import PollAction from './PollActions';
 import PollInfos from './PollInfos';
+import PollChoices from './PollChoices';
 import { connect } from 'react-redux';
 import agent from '../../agent';
 

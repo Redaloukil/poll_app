@@ -2,10 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 
-const mapDispatchToProps = dispatch => ({
-    onVote: payload =>
-      dispatch({ type: SET_VOTE, payload }),
-});
+
 
 
 
