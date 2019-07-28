@@ -26,6 +26,9 @@ class Article extends React.Component {
     ]));
   }
 
+
+  g
+
   componentWillUnmount() {
     this.props.onUnload();
   }

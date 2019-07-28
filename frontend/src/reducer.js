@@ -7,11 +7,13 @@ import editor from './reducers/editor';
 import home from './reducers/home';
 import profile from './reducers/profile';
 import settings from './reducers/settings';
+import pollsList from './reducers/pollsList';
 import { routerReducer } from 'react-router-redux';
 
 export default combineReducers({
   article,
   articleList,
+  pollsList,
   auth,
   common,
   editor,

@@ -81,9 +81,13 @@ const Articles = {
   //   requests.del(`/polls?${slug}`);
   // },
 const Polls = {
-  get : (slug) => {
-    request.get(`/polls?${slug}`);
-  },
+  all : () => 
+    requests.get('/polls/'),
+  get : () => 
+    requests.get('/polls/'),
+  create : (poll) => 
+    requests.post('/polls/' , {poll}) ,
+    
   
 }
 // const choices = {

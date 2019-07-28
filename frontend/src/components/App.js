@@ -12,7 +12,6 @@ import Profile from '../components/Profile';
 import ProfileFavorites from '../components/ProfileFavorites';
 import Register from '../components/Register';
 import Settings from '../components/Settings';
-import Poll from './Poll/Index';
 import { store } from '../store';
 import { push } from 'react-router-redux';
 
@@ -58,7 +57,7 @@ class App extends React.Component {
             currentUser={this.props.currentUser} />
             <Switch>
               <Route exact path="/" component={Home}/>
-              <Route path="/login" component={Login} />
+              <Route path="/login" component={Login}/>
               <Route path="/register" component={Register} />
               <Route path="/editor/:slug" component={Editor} />
               <Route path="/editor" component={Editor} />
@@ -66,8 +65,7 @@ class App extends React.Component {
               <Route path="/settings" component={Settings} />
               <Route path="/@:username/favorites" component={ProfileFavorites} />
               <Route path="/@:username" component={Profile} />
-              <Route path="/polls/" component={} />
-              <Route path="/polls/:slug" component={Poll} />
+              
             </Switch>
         </div>
       );

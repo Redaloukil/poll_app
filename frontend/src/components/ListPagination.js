@@ -30,7 +30,6 @@ const ListPagination = props => {
   return (
     <nav>
       <ul className="pagination">
-
         {
           range.map(v => {
             const isCurrent = v === props.currentPage;
