@@ -8,16 +8,47 @@ import {
   LOGOUT
 } from '../constants/actionTypes';
 
+const PasswordConfirmationWindow = () => {
+  return (
+    <div>
+      
+      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+      </button>
+
+      
+      <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div className="modal-body">
+            ...
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" className="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  )
+}
 class SettingsForm extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      image: '',
-      username: '',
-      bio: '',
-      email: '',
-      password: ''
+      email : '', 
+      username : '',
+      bio : '',
+      password : '',
+      confirmPassword : '' ,
     };
 
     this.updateState = field => ev => {
@@ -28,7 +59,7 @@ class SettingsForm extends React.Component {
 
     this.submitForm = ev => {
       ev.preventDefault();
-
+      
       const user = Object.assign({}, this.state);
       if (!user.password) {
         delete user.password;
@@ -36,15 +67,18 @@ class SettingsForm extends React.Component {
 
       this.props.onSubmitForm(user);
     };
+    this.confirmPassword = password => {
+      
+    }
   }
 
   componentWillMount() {
     if (this.props.currentUser) {
       Object.assign(this.state, {
-        image: this.props.currentUser.image || '',
+        email: this.props.currentUser.email,
         username: this.props.currentUser.username,
         bio: this.props.currentUser.bio,
-        email: this.props.currentUser.email
+        password : this.props.currentUser.Password,
       });
     }
   }
@@ -52,10 +86,10 @@ class SettingsForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser) {
       this.setState(Object.assign({}, this.state, {
-        image: nextProps.currentUser.image || '',
+        email: nextProps.currentUser.email,
         username: nextProps.currentUser.username,
         bio: nextProps.currentUser.bio,
-        email: nextProps.currentUser.email
+        password : nextProps.currentUser.password,
       }));
     }
   }
@@ -64,16 +98,6 @@ class SettingsForm extends React.Component {
     return (
       <form onSubmit={this.submitForm}>
         <fieldset>
-
-          <fieldset className="form-group">
-            <input
-              className="form-control"
-              type="text"
-              placeholder="URL of profile picture"
-              value={this.state.image}
-              onChange={this.updateState('image')} />
-          </fieldset>
-
           <fieldset className="form-group">
             <input
               className="form-control form-control-lg"
@@ -117,7 +141,7 @@ class SettingsForm extends React.Component {
             disabled={this.state.inProgress}>
             Update Settings
           </button>
-
+          <PasswordConfirmationWindow/>
         </fieldset>
       </form>
     );
@@ -135,6 +159,38 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
   onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED })
 });
+
+const PasswordConfirmationWindow = () => {
+  return (
+    <div>
+      
+      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+      </button>
+
+      
+      <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div className="modal-body">
+            ...
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" className="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  )
+}
 
 class Settings extends React.Component {
   render() {
@@ -154,6 +210,7 @@ class Settings extends React.Component {
 
               <hr />
 
+              
               <button
                 className="btn btn-outline-danger"
                 onClick={this.props.onClickLogout}>

@@ -3,7 +3,6 @@ const User = require('../models/User');
 
 //login 
 exports.loginApi = async (req , res , next ) => {
-    
     const {email , password} = req.body;
     console.log(email , password);
     try {
@@ -14,12 +13,15 @@ exports.loginApi = async (req , res , next ) => {
             return next(err);
         }
         const token = user.generateToken();
-      return res.status(200).json({ token });
+        return res.status(200).json({ token });
     }catch (err) {
       next(err);
     }
 }
-    
+
+exports.signUpApi = async (req , res , next ) => {
+    const {username , f password}
+}
     
     
 

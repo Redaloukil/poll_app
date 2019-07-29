@@ -1,31 +1,17 @@
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const constants = require('./../config/constants');
+
 
 const userSchema = new mongoose.Schema({
-  
   email: { type: String, unique: true },
-  
+  username : { type : String , unique : true },
+  bio : { type : String },
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
-
-  
-  facebook: String,
-  twitter: String,
-  google: String,
-  
-  profile: {
-    first_name : String ,
-    last_name : String ,
-    gender: String,
-    location: String,
-    website: String,
-    picture: String
-  }
 }, { timestamps: true });
-
-
 
 /**
  * Password hash middleware.
@@ -45,6 +31,9 @@ userSchema.pre('save', function save(next) {
 
 
 
+/**
+ * Generate token.
+ */
 userSchema.methods.generateToken = function generateToken(){
   return jwt.sign({ _id: this._id }, Constants.security.sessionSecret, {
     expiresIn: Constants.security.sessionExpiration,
@@ -74,9 +63,7 @@ userSchema.methods.gravatar = function gravatar(size) {
 };
 
 
-userSchema.methods.authenticate = (password) => {
 
-}
 
 const User = mongoose.model('User', userSchema);
 
