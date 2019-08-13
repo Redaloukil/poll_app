@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: ( payload) =>
+  onLoad: (payload) =>
     dispatch({ type: HOME_PAGE_LOADED , payload }),
   onUnload: () =>
     dispatch({  type: HOME_PAGE_UNLOADED })
