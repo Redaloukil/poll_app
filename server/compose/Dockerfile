@@ -1,14 +1,14 @@
 FROM node:10-alpine
 
-WORKDIR /app
+WORKDIR /src/app    
 
-COPY package.json /app/package.json
+COPY package.json /src/app/package.json
+
+COPY . /app
 
 RUN npm install 
 
 COPY .env.example /app/.env.example
-
-COPY . /app
 
 CMD ["npm","start"]
 

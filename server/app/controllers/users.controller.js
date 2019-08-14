@@ -32,8 +32,7 @@ class UsersController extends BaseController {
 
   search = async (req, res, next) => {
     try {
-      // @TODO Add pagination
-      res.json(await User.find());
+      res.json(await User.find({}));
     } catch(err) {
       next(err);
     }
@@ -41,7 +40,6 @@ class UsersController extends BaseController {
 
   fetch = (req, res) => {
     const user = req.user || req.currentUser;
-
     if (!user) {
       return res.sendStatus(404);
     }
