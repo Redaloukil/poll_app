@@ -31,11 +31,11 @@ routes.post('/posts', authenticate, PostsController.create);
 routes.get('/posts/:id', PostsController._populate, PostsController.fetch);
 routes.delete('/posts/:id', authenticate, PostsController.delete);
 // Polls 
-routes.get('/posts/',)
-routes.post('/posts/',)
-routes.get('/posts/',)
-routes.get('/posts/',)
-routes.get('/posts/',)
+routes.get('/posts/',PostsController)
+routes.post('/posts/',PostsController)
+routes.get('/posts/',PostsController)
+routes.get('/posts/',PostsController)
+routes.get('/posts/',PostsController)
 
 
 // Admin

@@ -1,5 +1,26 @@
 const {Poll} = require('../models/poll');
 
+
+const search = async (req , res , err) => {
+    try {
+        const polls = await Poll.find()
+        if(!polls){
+            return res.status('404').json({'not found' : 'weli Radoi'});
+        }
+        return res.status('200').json(polls);
+    }catch {
+        throw err
+    }
+}
+
+const detail = async (req , res , err) => {
+
+}
+
+const update = async (req , res , err) => {
+
+}
+
 const create = async (req , res , err) => {
     const { title , description } = req.body;
 
@@ -10,11 +31,11 @@ const create = async (req , res , err) => {
     return res.status(201).json(poll);
 }
 
-const confirmationToken = () => {
 
-}
 
 module.exports = {
+    search ,
+    detail ,
     create , 
-    confirmationToken
+    update , 
 }

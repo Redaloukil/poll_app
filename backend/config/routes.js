@@ -10,6 +10,7 @@ const userController = require('../app/controllers/user');
 const pollController = require('../app/controllers/poll');
 const postController = require('../app/controllers/post');
 
+const {} = require('../app/middleware/auth');
 /**
  * Expose
  */
@@ -20,7 +21,6 @@ module.exports = function(app) {
   /**
    * Error handling
    */
-
   app.use(function(err, req, res, next) {
     // treat as 404
     if (
@@ -35,19 +35,45 @@ module.exports = function(app) {
     res.status(500).render('500', { error: err.stack });
   });
 
-  // assume 404 since no middleware responded
-  // app.use(function(req, res) {
-  //   res.status(404).render('404', {
-  //     url: req.originalUrl,
-  //     error: 'Not found'
-  //   });
-  // });
+  
+  
+  /**
+   * Home routers
+   */
+  app.get('/', homeController.home);
+  
+  /**
+   * Auth routers
+  */
+  app.post('/login/' , authController.login);
+  app.post('/signup/' , authController.signup);
+  
   /**
    * User routers
    */
-  app.get('/login/' , authController.login);
-  app.get('/signup/' , authController.signup);
-  app.get('/', homeController.home )
-  // app.post('/users/ ' , userController );
+  app.get('/users/', isAdmin ,authenticate , userController.search);
+  app.get('/users/:id', authenticate ,userController.detail);
+  app.patch('/users/:id', authenticate ,userController.update);
+  app.post('/users/' , authenticate , userController.create);
+  
+  /**
+   * Poll routers
+  */
+  app.get('/polls/' , pollController.search);
+  app.get('/polls/:id', authenticate , pollController.detail);
+  app.patch('/polls/:id' , pollController.update);
+  app.post('/polls/' , authenticate , pollController.create);
+  app.get('/polls/:id/choices/' , pollController.searchChoices );
+  app.post('/polls/:id/choices/' , pollController.createChoice);
+  
+  /**
+   * Post routers
+  */
+  app.get('/posts/', authenticate , userController.search);
+  app.get('/posts/:id', authenticate ,userController.detail);
+  app.patch('/posts/:id', authenticate ,userController.update);
+  app.delete('/posts/',authenticate , PostsController.delete);
+  app.post('/posts/' , authenticate , userController.create);
+  
 
 };

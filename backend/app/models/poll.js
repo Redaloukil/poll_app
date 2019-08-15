@@ -26,7 +26,7 @@ const ChoiceSchema = new Schema({
 const PollSchema = new Schema({
   title: {type: String, required:true ,default: ''},
   description: {type: String, required:true ,default: ''},
-  user : {type : Schema.Types.ObjectId }
+  user : {type : Schema.Types.ObjectId },
 });
 
 /**
