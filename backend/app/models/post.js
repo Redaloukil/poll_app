@@ -1,6 +1,7 @@
 /*!
  * Module dependencies
  */
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -10,8 +11,14 @@ const Schema = mongoose.Schema;
  * Post schema
  */
 const PostSchema = new Schema({
-  title: {type: String, required:true ,default: ''},
-  description: {type: String, required:true ,default: ''},
+    title: { 
+      type: String, 
+      required:true 
+    },
+    description: { 
+      type: String, 
+      required:true 
+    },
 });
 
 /**
@@ -37,4 +44,9 @@ PostSchema.static({});
  * Register
  */
 
-mongoose.model('Post', PostSchema);
+const Post = mongoose.model('Post',PostSchema)
+
+
+module.exports = {
+    Post,
+};

@@ -2,8 +2,10 @@
  * Module dependencies.
  */
 
-exports.index = function(req, res) {
-  res.render('home/index', {
-    title: 'Node Express Mongoose Boilerplate'
-  });
-};
+const home = async (req , res , err) => {
+  return res.status(200).json({"not found" : "Radoi weli"});
+}
+
+module.exports = {
+  home
+}

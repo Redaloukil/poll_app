@@ -47,6 +47,7 @@ module.exports = function(app) {
    */
   app.get('/login/' , authController.login);
   app.get('/signup/' , authController.signup);
+  app.get('/', homeController.home )
   // app.post('/users/ ' , userController );
 
 };

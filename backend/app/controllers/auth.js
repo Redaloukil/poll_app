@@ -1,14 +1,37 @@
-const User = require('../models/user');
+const { User } = require('../models/user');
 
-const login = (req , res , err) => {
+const login = async (req , res , err) => {
     const { email , password } = req.body;
-    return res.status(200).json({email , password});
+    try {
+        const user = await User.findOne({ email });
+  
+        if (!user || ! user.authenticate(password)) {
+          const err = new Error('Please verify your credentials.');
+          err.status = 401;
+          return next(err);
+        }
+        const token = user.generateToken();
+        return res.status(200).json({ token });
+    } catch (err) {
+        next(err);
+    }
 }
-const signup = (req , res , err) => {
-    return res.status(200).json({"hello world" : "hello world this is me"})
-}
-const confirmationToken = () => {
 
+const signup = async (req , res , err ) => {
+    const { username , email , password } = req.body;
+    
+    try {
+          const user = await User.create(newUser);
+          const token = user.generateToken();
+          res.status(201).json({ token });
+    } catch(err) {
+          err.status = 400;
+          next(err);
+    }
+}
+
+const confirmationToken = () => {
+    
 }
 
 module.exports = {

@@ -2,14 +2,22 @@
  * Module dependencies
  */
 const mongoose = require('mongoose');
+const User = require('../models/user');
 const Schema = mongoose.Schema;
+
 
 /**
  * Choice Choice
 */
 const ChoiceSchema = new Schema({
-    title : { type : String , required :true },
-    // choice : { type : Schema.Types.ObjectId , required : true } ,
+    title : { 
+        type : String , 
+        required :true 
+    },
+    description : { 
+        type : String , 
+        required : true , 
+    },
 })
 
 /**
@@ -18,6 +26,7 @@ const ChoiceSchema = new Schema({
 const PollSchema = new Schema({
   title: {type: String, required:true ,default: ''},
   description: {type: String, required:true ,default: ''},
+  user : {type : Schema.Types.ObjectId }
 });
 
 /**
@@ -43,4 +52,11 @@ PollSchema.static({});
  * Register
  */
 
-mongoose.model('Poll', PollSchema);
+const Poll = mongoose.model('Poll', PollSchema);
+const Choice = mongoose.model('Choice', ChoiceSchema);
+
+
+module.exports = {
+    Poll , 
+    Choice ,
+}
