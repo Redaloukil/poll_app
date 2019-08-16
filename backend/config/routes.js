@@ -10,7 +10,7 @@ const userController = require('../app/controllers/user');
 const pollController = require('../app/controllers/poll');
 const postController = require('../app/controllers/post');
 
-const {} = require('../app/middleware/auth');
+const { authenticate , isAdmin } = require('../app/middleware/auth');
 /**
  * Expose
  */
@@ -48,32 +48,32 @@ module.exports = function(app) {
   app.post('/login/' , authController.login);
   app.post('/signup/' , authController.signup);
   
-  /**
-   * User routers
-   */
-  app.get('/users/', isAdmin ,authenticate , userController.search);
-  app.get('/users/:id', authenticate ,userController.detail);
-  app.patch('/users/:id', authenticate ,userController.update);
-  app.post('/users/' , authenticate , userController.create);
+  // /**
+  //  * User routers
+  //  */
+  // app.get('/users/', isAdmin ,authenticate , userController.search);
+  // app.get('/users/:id', authenticate ,userController.detail);
+  // app.patch('/users/:id', authenticate ,userController.update);
+  // app.post('/users/' , authenticate , userController.create);
   
-  /**
-   * Poll routers
-  */
-  app.get('/polls/' , pollController.search);
-  app.get('/polls/:id', authenticate , pollController.detail);
-  app.patch('/polls/:id' , pollController.update);
-  app.post('/polls/' , authenticate , pollController.create);
-  app.get('/polls/:id/choices/' , pollController.searchChoices );
-  app.post('/polls/:id/choices/' , pollController.createChoice);
+  // /**
+  //  * Poll routers
+  // */
+  // app.get('/polls/' , pollController.search);
+  // app.get('/polls/:id', authenticate , pollController.detail);
+  // app.patch('/polls/:id' , pollController.update);
+  // app.post('/polls/' , authenticate , pollController.create);
+  // app.get('/polls/:id/choices/' , pollController.searchChoices );
+  // app.post('/polls/:id/choices/' , pollController.createChoice);
   
-  /**
-   * Post routers
-  */
-  app.get('/posts/', authenticate , userController.search);
-  app.get('/posts/:id', authenticate ,userController.detail);
-  app.patch('/posts/:id', authenticate ,userController.update);
-  app.delete('/posts/',authenticate , PostsController.delete);
-  app.post('/posts/' , authenticate , userController.create);
+  // /**
+  //  * Post routers
+  // */
+  // app.get('/posts/', authenticate , userController.search);
+  // app.get('/posts/:id', authenticate ,userController.detail);
+  // app.patch('/posts/:id', authenticate ,userController.update);
+  // app.delete('/posts/',authenticate , PostsController.delete);
+  // app.post('/posts/' , authenticate , userController.create);
   
 
 };

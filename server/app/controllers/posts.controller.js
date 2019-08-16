@@ -53,16 +53,16 @@ class PostController extends BaseController {
 
   create = async (req, res, next) => {
     const params = this.filterParams(req.body, this.whitelist);
-
+    
     const post = new Post({
       ...params,
       _user: req.currentUser._id,
     });
 
     try {
-      res.status(201).json(await post.save());
+        res.status(201).json(await post.save());
     } catch(err) {
-      next(err);
+        next(err);
     }
   }
 

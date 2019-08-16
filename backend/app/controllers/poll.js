@@ -21,14 +21,20 @@ const update = async (req , res , err) => {
 
 }
 
-const create = async (req , res , err) => {
+const create = async (req , res , next )=> {
     const { title , description } = req.body;
 
-    const poll = await Poll.create({title , description});
-    if(!poll){
-        return res.status(401).json({ "" : "" });
+    const poll = new Poll({ 
+        title , 
+        description ,
+        _user: req.currentUser._id,
+    });
+
+    try {
+        res.status(201).json(await poll.save());
+    } catch(err) {
+        next(err);
     }
-    return res.status(201).json(poll);
 }
 
 
