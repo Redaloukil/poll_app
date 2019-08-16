@@ -36,7 +36,7 @@ module.exports = function(app, passport) {
   );
 
   // Static files middleware
-  app.use(express.static(config.root + '/public'));
+  // app.use(express.static(config.root + '/public'));
 
   // Use winston on production
   let log;
@@ -54,24 +54,19 @@ module.exports = function(app, passport) {
   // Logging middleware
   if (env !== 'test') app.use(morgan(log));
 
-  // set views path and default layout
-  app.set('views', config.root + '/app/views');
-  app.set('view engine', 'pug');
-
-  // expose package.json to views
-  app.use(function(req, res, next) {
-    res.locals.pkg = pkg;
-    res.locals.env = env;
-    next();
-  });
-
+  
+  
   // bodyParser should be above methodOverride
   app.use(
     bodyParser.urlencoded({
       extended: true
     })
   );
+  
+  // https://github.com/expressjs/body-parser
   app.use(bodyParser.json());
+
+
   app.use(
     methodOverride(function(req) {
       if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -109,13 +104,14 @@ module.exports = function(app, passport) {
   app.use(helpers(pkg.name));
 
   // adds CSRF support
-  if (process.env.NODE_ENV !== 'test') {
-    app.use(csrf());
+  // if (process.env.NODE_ENV !== 'test') {
+  //   console.log("################CSRF");
+  //   app.use(csrf());
 
-    // This could be moved to view-helpers :-)
-    app.use(function(req, res, next) {
-      res.locals.csrf_token = req.csrfToken();
-      next();
-    });
-  }
+  //   // This could be moved to view-helpers :-)
+  //   app.use(function(req, res, next) {
+  //     res.locals.csrf_token = req.csrfToken();
+  //     next();
+  //   });
+  // }
 };

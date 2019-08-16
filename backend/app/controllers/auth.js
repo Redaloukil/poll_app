@@ -1,11 +1,12 @@
 const { User } = require('../models/user');
 
+
 const login = async (req , res , next) => {
     const { email , password } = req.body;
     try {
         const user = await User.findOne({ email });
   
-        if (!user || ! user.authenticate(password)) {
+        if (!user || !user.authenticate(password)) {
           const err = new Error('Please verify your credentials.');
           err.status = 401;
           return next(err);
@@ -24,7 +25,10 @@ const signup = async (req , res , err ) => {
           const user = await User.create({ username , email , password });
           
           if(!user) {
-              return res.status(404).json({"not found" : "wali Radoi"})
+            const err = new Error('Please verify your credentials.');
+            err.status = 401;
+            
+            return next(err);
           } 
           
           const token = user.generateToken();

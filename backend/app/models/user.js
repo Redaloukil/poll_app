@@ -4,7 +4,7 @@
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const Constants = require('../../utils/constants');
 const Schema = mongoose.Schema;
 
 /**
@@ -12,7 +12,7 @@ const Schema = mongoose.Schema;
  */
 const UserSchema = new Schema({
   name: { type: String, default: '' },
-  email: { type: String, default: '' },
+  email: { type: String ,default: '' ,unique:true },
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' }
 });

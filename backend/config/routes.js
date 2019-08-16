@@ -1,9 +1,9 @@
 'use strict';
 
+
 /**
  * Module dependencies.
  */
-
 const authController = require('../app/controllers/auth');
 const homeController = require('../app/controllers/home');
 const userController = require('../app/controllers/user');
@@ -16,25 +16,25 @@ const { authenticate , isAdmin } = require('../app/middleware/auth');
  */
 
 module.exports = function(app) {
-  
 
   /**
    * Error handling
    */
-  app.use(function(err, req, res, next) {
-    // treat as 404
-    if (
-      err.message &&
-      (~err.message.indexOf('not found') ||
-        ~err.message.indexOf('Cast to ObjectId failed'))
-    ) {
-      return next();
-    }
-    console.error(err.stack);
-    // error page
-    res.status(500).render('500', { error: err.stack });
-  });
-
+  // app.use(function(err, req, res, next) {
+  //   // treat as 404
+  //   if (
+  //     err.message &&
+  //     (~err.message.indexOf('not found') ||
+  //       ~err.message.indexOf('Cast to ObjectId failed'))
+  //   ) {
+  //     return next();
+  //   }
+  //   console.error(err.stack);
+  //   // error page
+  //   res.status(500).render('500', { error: err.stack });
+  // });
+  
+  
   
   
   /**
@@ -51,7 +51,7 @@ module.exports = function(app) {
   // /**
   //  * User routers
   //  */
-  // app.get('/users/', isAdmin ,authenticate , userController.search);
+  app.get('/users/',userController.search);
   // app.get('/users/:id', authenticate ,userController.detail);
   // app.patch('/users/:id', authenticate ,userController.update);
   // app.post('/users/' , authenticate , userController.create);

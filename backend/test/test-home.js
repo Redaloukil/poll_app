@@ -12,7 +12,6 @@ test('Home page', t => {
   request(app)
     .get('/')
     .expect(200)
-    .end(t.end);
-});
+  });
 
 test.onFinish(() => process.exit(0));
