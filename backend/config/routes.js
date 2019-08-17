@@ -10,7 +10,7 @@ const userController = require('../app/controllers/user');
 const pollController = require('../app/controllers/poll');
 const postController = require('../app/controllers/post');
 
-const { authenticate , isAdmin } = require('../app/middleware/auth');
+const { authenticate } = require('../app/middleware/authentication');
 /**
  * Expose
  */
@@ -20,45 +20,45 @@ module.exports = function(app) {
   /**
    * Error handling
    */
-  // app.use(function(err, req, res, next) {
-  //   // treat as 404
-  //   if (
-  //     err.message &&
-  //     (~err.message.indexOf('not found') ||
-  //       ~err.message.indexOf('Cast to ObjectId failed'))
-  //   ) {
-  //     return next();
-  //   }
-  //   console.error(err.stack);
-  //   // error page
-  //   res.status(500).render('500', { error: err.stack });
-  // });
+  app.use(function(err, req, res, next) {
+    // treat as 404
+    if (
+      err.message &&
+      (~err.message.indexOf('not found') ||
+        ~err.message.indexOf('Cast to ObjectId failed'))
+    ) {
+      return next();
+    }
+    console.error(err.stack);
+    // error page
+    res.status(500).render('500', { error: err.stack });
+  });
   
   
   
   
   /**
    * Home routers
-   */
+  */
   app.get('/', homeController.home);
   
   /**
    * Auth routers
   */
-  app.post('/login/' , authController.login);
-  app.post('/signup/' , authController.signup);
+  app.post('/login/' ,authController.login);
+  app.post('/signup/' ,authController.signup);
   
-  // /**
-  //  * User routers
-  //  */
-  app.get('/users/',userController.search);
-  // app.get('/users/:id', authenticate ,userController.detail);
-  // app.patch('/users/:id', authenticate ,userController.update);
-  // app.post('/users/' , authenticate , userController.create);
+  /**
+    * User routers
+  */
+  app.get('/users/', authenticate ,userController.search);
+  app.patch('/users/:id',authenticate ,userController.update);
+  // app.get('/users/',userController.search);
   
-  // /**
-  //  * Poll routers
-  // */
+  
+  /**
+    * Poll routers
+  */
   // app.get('/polls/' , pollController.search);
   // app.get('/polls/:id', authenticate , pollController.detail);
   // app.patch('/polls/:id' , pollController.update);

@@ -14,6 +14,7 @@ const search = async (req , res , err) => {
 }
 
 const detail = async (req , res , err) => {
+    
 
 }
 

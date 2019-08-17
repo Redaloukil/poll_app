@@ -18,15 +18,19 @@ const ChoiceSchema = new Schema({
         type : String , 
         required : true , 
     },
+    poll:{ 
+        type : Schema.Types.ObjectId , 
+        ref : 'User' 
+    },
 })
 
 /**
  * Poll schema
  */
 const PollSchema = new Schema({
-  title: {type: String, required:true ,default: ''},
-  description: {type: String, required:true ,default: ''},
-  user : {type : Schema.Types.ObjectId },
+  title: {type: String, required:true },
+  description: {type: String, required:true },
+  user : {type : Schema.Types.ObjectId , ref : 'User' },
 });
 
 /**

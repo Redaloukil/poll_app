@@ -26,6 +26,8 @@ const env = process.env.NODE_ENV || 'development';
  */
 
 module.exports = function(app, passport) {
+  
+ 
   app.use(helmet());
 
   // Compression middleware (should be placed before express.static)
@@ -55,17 +57,12 @@ module.exports = function(app, passport) {
   if (env !== 'test') app.use(morgan(log));
 
   
-  
-  // bodyParser should be above methodOverride
-  app.use(
-    bodyParser.urlencoded({
-      extended: true
-    })
-  );
-  
   // https://github.com/expressjs/body-parser
   app.use(bodyParser.json());
-
+  // bodyParser should be above methodOverride
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 
   app.use(
     methodOverride(function(req) {
@@ -103,15 +100,5 @@ module.exports = function(app, passport) {
   // should be declared after session and flash
   app.use(helpers(pkg.name));
 
-  // adds CSRF support
-  // if (process.env.NODE_ENV !== 'test') {
-  //   console.log("################CSRF");
-  //   app.use(csrf());
-
-  //   // This could be moved to view-helpers :-)
-  //   app.use(function(req, res, next) {
-  //     res.locals.csrf_token = req.csrfToken();
-  //     next();
-  //   });
-  // }
+  
 };

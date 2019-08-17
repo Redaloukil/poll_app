@@ -33,7 +33,7 @@ class UsersController extends BaseController {
   search = async (req, res, next) => {
     try {
       res.json(await User.find({}));
-    } catch(err) {
+    }catch(err) {
       next(err);
     }
   }
