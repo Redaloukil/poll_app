@@ -1,5 +1,6 @@
 const version = require('../../package.json').version
 const name = require('../../package.json').name;
+
 /*!
  * Module dependencies.
  */

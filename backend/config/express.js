@@ -27,6 +27,8 @@ const env = process.env.NODE_ENV || 'development';
 
 module.exports = function(app, passport) {
   
+  
+
  
   app.use(helmet());
 
@@ -57,13 +59,7 @@ module.exports = function(app, passport) {
   if (env !== 'test') app.use(morgan(log));
 
   
-  // https://github.com/expressjs/body-parser
-  app.use(bodyParser.json());
-  // bodyParser should be above methodOverride
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }));
-
+  
   app.use(
     methodOverride(function(req) {
       if (req.body && typeof req.body === 'object' && '_method' in req.body) {

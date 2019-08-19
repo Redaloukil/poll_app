@@ -17,12 +17,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const config = require('./config');
+const bodyParser = require('body-parser');
 
 const models = join(__dirname, 'app/models');
 const port = process.env.PORT || 3000;
 
 const app = express();
 const connection = connect();
+
+app.use(express.json())
+// https://github.com/expressjs/body-parser
+app.use(bodyParser.json());
+// bodyParser should be above methodOverride
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 /**
  * Expose

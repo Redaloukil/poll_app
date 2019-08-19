@@ -1,6 +1,5 @@
 const {Poll} = require('../models/poll');
 
-
 const search = async (req , res , err) => {
     try {
         const polls = await Poll.find()
@@ -9,13 +8,13 @@ const search = async (req , res , err) => {
         }
         return res.status('200').json(polls);
     }catch {
-        throw err
+        throw err;
     }
 }
 
 const detail = async (req , res , err) => {
+    const {title , description } = res.body;
     
-
 }
 
 const update = async (req , res , err) => {
