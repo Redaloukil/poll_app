@@ -4,11 +4,10 @@ import { request } from 'http';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'localhost:4000/';
+const API_ROOT = 'localhost:3000/';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
-
 
 //set default token to null 
 let token = null;
@@ -35,14 +34,16 @@ const requests = {
 const Auth = {
   //request to get current user 
   current: () =>
-    requests.get('/user'),
+    requests.get('users/current/'),
   //login request
   login: (email, password) =>
-    requests.post('/users/login', { user: { email, password } }),
-  register: (username, email, password) =>
-    requests.post('/users', { user: { username, email, password } }),
+    requests.post('/users/login/', { user: { email, password } }),
+  //signup request
+  signup: (username, email, password) =>
+    requests.post('/users/signup/', { user: { username, email, password } }),
+  //update request
   save: user =>
-    requests.put('/user', { user })
+    requests.put('/users/update/', { user })
 };
 
 
@@ -90,20 +91,18 @@ const Polls = {
     
   
 }
-// const choices = {
-//   allByPoll : (poll) => {
-//       requests.get();
-//   },
-//   create : (poll , choice ) => {
-//     requests.post( , {choice});
-//   },
-//   vote : (poll , choiceNumber) => {
-//     requests.post(, )
-//   },
-//   del : (choiceNumber) => {
-//     requests.del( , {choiceNumber})
-//   }
-// }
+
+const choices = {
+  forPoll : (slug) => {
+    requests.get(`/polls/${slug}/`);
+  },
+  create : (slug ,choice) => {
+    requests.post(`/polls/${slug}/comments`, {choice});
+  },
+  del : (slug , id) => {
+    requests.del(`/polls/${slug}/comments/${id}`);
+  }
+}
 
 const Comments = {
   create: (slug, comment) =>

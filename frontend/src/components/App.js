@@ -1,6 +1,7 @@
 import agent from '../agent';
 import Header from './Header';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { APP_LOAD, REDIRECT } from '../constants/actionTypes';
 import { Route, Switch } from 'react-router-dom';
@@ -12,6 +13,7 @@ import Profile from '../components/Profile';
 import ProfileFavorites from '../components/ProfileFavorites';
 import Register from '../components/Register';
 import Settings from '../components/Settings';
+
 import { store } from '../store';
 import { push } from 'react-router-redux';
 
@@ -63,7 +65,6 @@ class App extends React.Component {
               <Route path="/editor" component={Editor} />
               <Route path="/article/:id" component={Article} />
               <Route path="/settings" component={Settings} />
-              <Route path="/@:username/favorites" component={ProfileFavorites} />
               <Route path="/@:username" component={Profile} />
               
             </Switch>
@@ -80,8 +81,19 @@ class App extends React.Component {
   }
 }
 
-// App.contextTypes = {
-//   router: PropTypes.object.isRequired
-// };
+App.contextTypes = {
+  //variables
+  appLoaded : PropTypes.bool.isRequired ,
+  appName : PropTypes.string.isRequired,
+  router: PropTypes.object.isRequired , 
+  //methods 
+  onRedirect : PropTypes.func.isRequired ,
+  
+
+   
+
+};
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

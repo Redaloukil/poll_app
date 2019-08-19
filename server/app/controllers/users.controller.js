@@ -4,10 +4,8 @@ import User from '../models/user';
 class UsersController extends BaseController {
 
   whitelist = [
-    'firstname',
-    'lastname',
     'email',
-    'username',
+    'name',
     'password',
   ];
 
@@ -43,7 +41,6 @@ class UsersController extends BaseController {
     if (!user) {
       return res.sendStatus(404);
     }
-
     res.json(user);
   }
 
@@ -68,7 +65,6 @@ class UsersController extends BaseController {
   update = async (req, res, next) => {
     const newAttributes = this.filterParams(req.body, this.whitelist);
     const updatedUser = Object.assign({}, req.currentUser, newAttributes);
-
     try {
       res.status(200).json(await updatedUser.save());
     } catch (err) {
@@ -80,7 +76,6 @@ class UsersController extends BaseController {
     if (!req.currentUser) {
       return res.sendStatus(403);
     }
-
     try {
       await req.currentUser.remove();
       res.sendStatus(204);

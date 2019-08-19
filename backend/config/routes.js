@@ -44,8 +44,10 @@ module.exports = function(app) {
   /**
    * Auth routers
   */
-  app.post('/login/' ,authController.login);
-  app.post('/signup/' ,authController.signup);
+  app.post('/users/login/'  ,authController.login);
+  app.post('/users/signup/' ,authController.signup);
+  app.post('/users/current/' ,authController.current);
+  
   /**
     * User routers
   */

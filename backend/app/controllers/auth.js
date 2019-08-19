@@ -46,8 +46,17 @@ const signup = async (req , res ,next ) => {
     }
 }
 
+const current = async (req , res , next) => {
+    try {
+
+    }catch {
+
+    }
+}
+
+
 module.exports = {
     login, 
     signup,
-    
+    current ,
 }
