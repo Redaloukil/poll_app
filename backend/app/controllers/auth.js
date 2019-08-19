@@ -24,7 +24,7 @@ const login = async (req , res , next) => {
 const signup = async (req , res ,next ) => {
     const { name , email , password } = req.body;
     console.log(name , email , password);
-    const createdUser = User({ name , email ,password})
+    const createdUser = new User({ name , email ,password})
     try {
           const user = await createdUser.save();
           

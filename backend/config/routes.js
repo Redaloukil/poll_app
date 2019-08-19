@@ -41,17 +41,15 @@ module.exports = function(app) {
    * Home routers
   */
   app.get('/', homeController.home);
-  
   /**
    * Auth routers
   */
   app.post('/login/' ,authController.login);
   app.post('/signup/' ,authController.signup);
-  
   /**
     * User routers
   */
-  app.get('/users/', authenticate ,userController.search);
+  app.get('/users/', userController.search);
   app.patch('/users/:id',authenticate ,userController.update);
   // app.get('/users/',userController.search);
   

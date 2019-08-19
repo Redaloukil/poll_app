@@ -42,10 +42,23 @@ const UserSchema = new Schema({
 
 /**
  * Add your
- * - pre-save hooks
- * - validations
- * - virtuals
  */
+
+UserSchema
+  .pre('save', function(done) {
+    // Encrypt password before saving the document
+    if (this.isModified('password')) {
+      const { saltRounds } = Constants.security;
+      this._hashPassword(this.password, saltRounds, (err, hash) => {
+        this.password = hash;
+        done();
+      });
+    } else {
+      done();
+    }
+    // eslint-enable no-invalid-this
+  });
+
 
 /**
  * Methods
@@ -74,6 +87,10 @@ UserSchema.method({
       return jwt.sign({ _id: this._id }, Constants.security.sessionSecret, {
         expiresIn: Constants.security.sessionExpiration,
       });
+  },
+
+  storePassword(password){
+    this.password = bcryptjs.hashSync() 
   },
 
   /**
