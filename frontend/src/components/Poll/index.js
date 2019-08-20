@@ -9,8 +9,10 @@ import PollChoices from './PollChoices';
 import { connect } from 'react-redux';
 import agent from '../../agent';
 
-const mapStateToProps = state => ({
 
+const mapStateToProps = state => ({
+    auth : state.auth,
+    poll : state.poll,
 });
   
 const mapDispatchToProps = dispatch => ({
@@ -20,18 +22,18 @@ const mapDispatchToProps = dispatch => ({
       dispatch({  type: POLL_PAGE_UNLOADED })
 });
 class Poll extends React.Component {
-
     componentWillMount(){
         if(this.props.match.slug){
-            this.props.onLoad(agent.Polls.get());
+            const promise = new Promise();
+            this.props.onLoad(Promise.all[agent.Polls.get(slug) ,agent.Choices.forPoll(slug)] );
         }
         this.props.onUnload();
-
     }
+    
     render(){
         if (!this.props.poll) {
             return (
-                <div>Internal Error has been detected..</div>
+                <div>loading..</div>
             )
         }else {
             return(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ListPagination from './ListPagination';
+// import ListPagination from './ListPagination';
 
 const PollsList = props => {
     if (!props.polls){
@@ -15,18 +15,17 @@ const PollsList = props => {
             </div>
         )
     }
-    const pollsCount = this.props.polls.length
     return (
         <div>
-            this.props.polls.map((poll) =>{
-                <div className="poll">
-                    <Link>poll</Link>
-                    
+            this.props.polls.map((element , key) =>{
+                <div className="home-poll">
+                    <h1><Link to="">{element.title}</Link></h1>
+                    <p>{element.description}</p>
                 </div>
             })
 
 
-            <ListPagination/>
+            
         </div>
   );
 };

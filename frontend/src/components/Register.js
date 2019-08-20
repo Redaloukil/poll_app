@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import from 'pro'
+import PropTypes from 'prop-types';
 import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';

@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
 
 class Home extends React.Component {
   componentWillMount() {
-    this.props.onLoad(agent.Polls.get())
+    this.props.onLoad(agent.Polls.all());
   }
 
   componentWillUnmount() {
