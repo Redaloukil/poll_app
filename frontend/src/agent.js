@@ -88,11 +88,18 @@ const Polls = {
     requests.get('/polls/'),
   create : (poll) => 
     requests.post('/polls/' , {poll}) ,
-    
-  
 }
 
-const choices = {
+const Posts = {
+  all: () =>
+    requests.get(`/posts/`),
+  get: slug =>
+    requests.get(`/articles/${slug}`),
+  del: slug =>
+    requests.del(`/articles/${slug}`),
+}
+
+const Choices = {
   forPoll : (slug) => {
     requests.get(`/polls/${slug}/`);
   },
@@ -113,20 +120,14 @@ const Comments = {
     requests.get(`/articles/${slug}/comments`)
 };
 
-const Profile = {
-  get: username =>
-    requests.get(`/profiles/${username}`),
-  follow: username =>
-    requests.post(`/profiles/${username}/follow`),
-  unfollow: username =>
-    requests.del(`/profiles/${username}/follow`)
-};
+
 
 export default {
-  Polls ,
-  Articles,
   Auth,
+  Polls ,
+  Posts,
+  Choices,
   Comments,
-  Profile,
+  
   setToken: _token => { token = _token; }
 };

@@ -46,25 +46,25 @@ module.exports = function(app) {
   */
   app.post('/users/login/'  ,authController.login);
   app.post('/users/signup/' ,authController.signup);
-  app.post('/users/current/' ,authController.current);
+  // app.post('/users/current/' ,authController.current);
   
   /**
     * User routers
   */
-  app.get('/users/', userController.search);
-  app.patch('/users/:id',authenticate ,userController.update);
+  // app.get('/users/', userController.search);
+  // app.patch('/users/:id',authenticate ,userController.update);
   // app.get('/users/',userController.search);
   
   
   /**
     * Poll routers
   */
-  // app.get('/polls/' , pollController.search);
+  // app.get('/polls/' , authenticate ,  pollController.search);
   // app.get('/polls/:id', authenticate , pollController.detail);
-  // app.patch('/polls/:id' , pollController.update);
+  // app.patch('/polls/:id' ,authenticate ,pollController.update);
   // app.post('/polls/' , authenticate , pollController.create);
-  // app.get('/polls/:id/choices/' , pollController.searchChoices );
-  // app.post('/polls/:id/choices/' , pollController.createChoice);
+  // app.get('/polls/:id/choices/' , authenticate , pollController.searchChoices );
+  // app.post('/polls/:id/choices/' , authenticate , pollController.createChoice);
   
   // /**
   //  * Post routers

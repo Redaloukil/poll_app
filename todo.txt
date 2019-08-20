@@ -1,4 +1,4 @@
 1 - build data base schema.
 2 - test the crud of poll subject and poll choices.
-3 - build the electorat shcema , asscoiate every electorat to its.
+3 - build the electorat schema , asscoiate every electorat to its.
 

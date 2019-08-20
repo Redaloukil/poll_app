@@ -14,17 +14,9 @@ import {
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case SET_PAGE:
-      return {
-        ...state,
-        polls: action.payload.polls,
-        pollsCount: action.payload.pollsCount,
-        currentPage: action.page
-      };
     case HOME_PAGE_LOADED:
       return {
         ...state,
-        pager: action.pager,
         polls: action.payload[1].polls,
         pollsCount: action.payload[1].pollsCount,
         currentPage: 0,
