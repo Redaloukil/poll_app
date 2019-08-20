@@ -2,8 +2,10 @@ const { User } = require('../models/user');
 
 const login = async (req , res , next) => {
     const { email , password } = req.body;
+    
     console.log(req.headers);
     console.log(req.body);
+    
     try {
         const user = await User.findOne({ email });
   
@@ -23,7 +25,10 @@ const login = async (req , res , next) => {
 
 const signup = async (req , res ,next ) => {
     const { name , email , password } = req.body;
-    console.log(name , email , password);
+    
+    console.log(req.headers);
+    console.log(req.body);
+    
     const createdUser = new User({ name , email ,password})
     try {
           const user = await createdUser.save();
@@ -47,16 +52,32 @@ const signup = async (req , res ,next ) => {
 }
 
 const current = async (req , res , next) => {
+    const { user } = req.currentUser;
+    
+    console.log(req.headers);
+    console.log(req.body);
+    
     try {
+        const current = await User.findOne({email});
+        if(!current){
+            const err = new Error('You are not authenticated');
+            err.status = 401;
+            return next(err);
+        }
+        const token = current.generateToken();
+        res.status(200).json({ token });
 
-    }catch {
-
+    } catch(err) {
+          err.status = 400;
+          
+          next(err);
     }
+
 }
 
 
 module.exports = {
     login, 
     signup,
-    current ,
+    current,
 }

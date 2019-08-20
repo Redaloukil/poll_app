@@ -1,4 +1,4 @@
-const {Poll} = require('../models/poll');
+const { Poll } = require('../models/poll');
 
 const search = async (req , res , err) => {
     try {

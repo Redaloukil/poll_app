@@ -88,6 +88,7 @@ App.contextTypes = {
   router: PropTypes.object.isRequired , 
   //methods 
   onRedirect : PropTypes.func.isRequired ,
+  dzzfz
   
 
    
