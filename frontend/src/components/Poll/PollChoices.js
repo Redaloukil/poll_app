@@ -1,7 +1,7 @@
 import React from 'react';
 import Choice from './../Choice/index';
 
-const PollChoices = props => {
+const PollChoices = (props) => {
     return (
         <div>
             props.choices.map((choice)=>{
@@ -11,4 +11,4 @@ const PollChoices = props => {
     )
 }
 
-export default PollChoices
+export default PollChoices;

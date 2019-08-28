@@ -8,26 +8,33 @@ import {
   
 } from '../../constants/actionTypes';
 import PollsList from './../PollsList';
+import PostsList from './../PostsList';
 
 
-const Promise = global.Promise;
+const promise = global.Promise;
 
 const mapStateToProps = state => ({
   ...state.home,
   appName: state.common.appName,
-  token: state.common.token
+  token: state.common.token,
+  polls:state.polls,
+  posts:state.posts,
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (payload) =>
     dispatch({ type: HOME_PAGE_LOADED , payload }),
   onUnload: () =>
-    dispatch({  type: HOME_PAGE_UNLOADED })
+    dispatch({  type: HOME_PAGE_UNLOADED }),
 });
 
 class Home extends React.Component {
   componentWillMount() {
-    this.props.onLoad(agent.Polls.all());
+    this.props.onLoad(
+      promise.all(
+        [agent.Posts.all() , agent.Polls.all()]
+      )
+    );
   }
 
   componentWillUnmount() {
@@ -40,6 +47,7 @@ class Home extends React.Component {
         <div className="container">
           <h1>HOME PAGE</h1>
           <PollsList polls={this.props.polls}/>
+          <PostsList posts={this.props.posts}/>
         </div>
         
       </div>

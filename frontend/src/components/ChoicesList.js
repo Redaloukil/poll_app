@@ -1,5 +1,5 @@
 import React from 'react';
 
-const ChoiceList = () => {
-    
+const ChoiceList = (props) => {
+
 }

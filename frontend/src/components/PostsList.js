@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PollsList = props => {
+
+const PostsList = props => {
     if (!props.polls){
         return (
             <div>Still loading..</div>
@@ -15,11 +16,11 @@ const PollsList = props => {
         )
     }
     return (
-        <div>
+        <div className="page" id="posts">
             this.props.polls.map((element , key) =>{
-                <div className="home-poll">
+                <div className="posts">
                     <h1><Link to="">{element.title}</Link></h1>
-                    <p>{element.description}</p>
+                    
                 </div>
             })
 
@@ -29,7 +30,7 @@ const PollsList = props => {
   );
 };
 
-export default PollsList;
+export default PostsList;
 
 
 

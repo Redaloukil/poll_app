@@ -1,5 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { 
+
+} from '../../constants/actionTypes';
+
+
+const mapDispatchToProps = dispatch => ({
+
+    onSelectChoice: payload =>
+      dispatch({ type: , payload })
+});
 
 class Choice extends React.Component {
     
@@ -9,7 +19,7 @@ class Choice extends React.Component {
     
     render(){
         return (
-            <div>
+            <div className="vote-choice">
                 <label>{props.text}</label>
                 <button onClick={this.props.onVote}></button>
             </div>

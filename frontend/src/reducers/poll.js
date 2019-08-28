@@ -13,19 +13,12 @@ export default (state = {}, action) => {
       return {
         ...state,
         poll: action.error ? null : action.payload,
+        error : action.error ? null : action.error,
       };
     case POLL_PAGE_UNLOADED:
-      return {};
-    case POLL_SUBMITTED : 
-      return {};
-    case POLL_DELETED :
-      return {};
-    case CHOICE_ADDED : 
-      return {};
-    case CHOICE_DELETED : 
-      return {};
-    POLL
-    
+      return {
+
+      };
     default:
       return state;
   }

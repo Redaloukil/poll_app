@@ -1,15 +1,8 @@
 import {
-  ARTICLE_FAVORITED,
-  ARTICLE_UNFAVORITED,
-  SET_PAGE,
-  APPLY_TAG_FILTER,
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
-  CHANGE_TAB,
-  PROFILE_PAGE_LOADED,
-  PROFILE_PAGE_UNLOADED,
-  PROFILE_FAVORITES_PAGE_LOADED,
-  PROFILE_FAVORITES_PAGE_UNLOADED
+  POLL_PAGE_LOADED,
+  POLL_PAGE_UNLOADED,
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {
@@ -17,13 +10,17 @@ export default (state = {}, action) => {
     case HOME_PAGE_LOADED:
       return {
         ...state,
-        polls: action.payload[1].polls,
-        pollsCount: action.payload[1].pollsCount,
-        currentPage: 0,
+        polls: action.error ? null : action.payload[1].polls,
+        error : action.error ? null : action.error,
       };
-    case HOME_PAGE_UNLOADED:
+    case HOME_PAGE_UNLOADED :
+    case POLLS_PAGE_UNLOADED :
       return {};
-    
+    case POLLS_PAGE_LOADED :
+      return {
+        ...state,
+        polls:[],
+      }
     default:
       return state;
   }
