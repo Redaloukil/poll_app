@@ -24,6 +24,11 @@ const mapDispatchToProps = dispatch => ({
 
 class Login extends React.Component {
   constructor() {
+    this.state = {
+      errors : {
+        
+      }
+    }
     super();
     this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
@@ -31,6 +36,8 @@ class Login extends React.Component {
       ev.preventDefault();
       this.props.onSubmit(email, password);
     };
+
+    
   }
 
   componentWillUnmount() {

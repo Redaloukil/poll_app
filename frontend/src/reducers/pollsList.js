@@ -1,8 +1,8 @@
 import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
-  POLL_PAGE_LOADED,
-  POLL_PAGE_UNLOADED,
+  POLLS_PAGE_LOADED,
+  POLLS_PAGE_UNLOADED,
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {

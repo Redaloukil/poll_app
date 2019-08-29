@@ -17,9 +17,8 @@ const PostsList = props => {
     }
     return (
         <div className="page" id="posts">
-            this.props.polls.map((element , key) =>{
+            this.props.posts.map((post) =>{
                 <div className="posts">
-                    <h1><Link to="">{element.title}</Link></h1>
                     
                 </div>
             })

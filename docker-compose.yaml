@@ -13,7 +13,7 @@ services:
         context: ./frontend/
         dockerfile: ./docker/Dockerfile
     volumes:
-      - ./frontend:/app/frontend
+      - ./frontend:/app
     ports:
       - 4000:4000
     depends_on:
@@ -24,7 +24,7 @@ services:
         context: ./backend/
         dockerfile: ./docker/Dockerfile
     volumes:
-      - ./backend:/app/backend
+      - ./backend:/app
       - /app/node_modules
     command: /usr/local/wait-for-it.sh mongo:27018 -- npm start
     env_file:
