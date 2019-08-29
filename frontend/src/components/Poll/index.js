@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
 class Poll extends React.Component {
     componentWillMount(){
         if(this.props.match.slug){
+            const slug = this.props.match.slug;
             const promise = new Promise();
             this.props.onLoad(Promise.all[agent.Polls.get(slug) ,agent.Choices.forPoll(slug)] );
         }

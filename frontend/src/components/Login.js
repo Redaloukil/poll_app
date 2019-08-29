@@ -24,12 +24,12 @@ const mapDispatchToProps = dispatch => ({
 
 class Login extends React.Component {
   constructor() {
+    super();
     this.state = {
       errors : {
         
       }
     }
-    super();
     this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
     this.submitForm = (email, password) => ev => {
@@ -71,7 +71,8 @@ class Login extends React.Component {
                       type="email"
                       placeholder="Email"
                       value={email}
-                      onChange={this.changeEmail} />
+                      onChange={this.changeEmail} 
+                      defaultValue={null}/>
                   </fieldset>
 
                   <fieldset className="form-group">
@@ -80,7 +81,8 @@ class Login extends React.Component {
                       type="password"
                       placeholder="Password"
                       value={password}
-                      onChange={this.changePassword} />
+                      onChange={this.changePassword} 
+                      defaultValue={null}/>
                   </fieldset>
 
                   <button

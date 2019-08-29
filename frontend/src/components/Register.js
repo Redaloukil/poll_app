@@ -44,9 +44,9 @@ class Register extends React.Component {
       this.props.onSubmit(username, email, password);
     }
     this.validate = () => {
-      if( this.state.username.length == 0 ) this.state.errors.username = "Invalid username";
-      if( this.state.email.length == 0 ) this.state.errors.email = "Invalid email";
-      if( this.state.password.length == 0 && this.state.password == this.state.cpassword) this.state.errors.password = "Invalid username";
+      if( this.state.username.length === 0 ) this.state.errors.username = "Invalid username";
+      if( this.state.email.length === 0 ) this.state.errors.email = "Invalid email";
+      if( this.state.password.length === 0 && this.state.password === this.state.cpassword) this.state.errors.password = "Invalid username";
       
     }
   }
@@ -84,7 +84,8 @@ class Register extends React.Component {
                       type="text"
                       placeholder="Username"
                       value={this.props.Username}
-                      onChange={this.changeUsername} />
+                      onChange={this.changeUsername} 
+                      defaultValue=""/>
                   </fieldset>
 
                   <fieldset className="form-group">
@@ -93,7 +94,8 @@ class Register extends React.Component {
                       type="email"
                       placeholder="Email"
                       value={this.props.email}
-                      onChange={this.changeEmail} />
+                      onChange={this.changeEmail} 
+                      defaultValue=""/>
                   </fieldset>
                     
                   <fieldset className="form-group">
@@ -102,7 +104,8 @@ class Register extends React.Component {
                       type="password"
                       placeholder="Password"
                       value={this.props.password}
-                      onChange={this.changePassword} />
+                      onChange={this.changePassword} 
+                      defaultValue=""/>
                   </fieldset>
                   
                   <fieldset className="form-group">
@@ -111,7 +114,8 @@ class Register extends React.Component {
                       type="password"
                       placeholder="Password"
                       value={this.props.password}
-                      onChange={this.changePassword} />
+                      onChange={this.changePassword} 
+                      defaultValue=""/>
                   </fieldset>
 
                   <button

@@ -14,11 +14,11 @@ const search = async (req , res , err) => {
 
 const detail = async (req , res , err) => {
     const {title , description } = res.body;
-    
+
 }
 
 const update = async (req , res , err) => {
-
+    const { title , description } = res.body;
 }
 
 const create = async (req , res , next )=> {

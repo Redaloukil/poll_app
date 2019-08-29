@@ -4,7 +4,7 @@ import { request } from 'http';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'localhost:3000/';
+const API_ROOT = 'http://localhost:3000/';
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
@@ -30,6 +30,11 @@ const requests = {
     superagent.post(`${API_ROOT}${url}`, body).use(tokenPlugin).then(responseBody)
 };
 
+const Home = {
+  ping:()=> {
+    requests.get('')
+  }
+}
 
 const Auth = {
   //request to get current user 
@@ -37,13 +42,13 @@ const Auth = {
     requests.get('users/current/'),
   //login request
   login: (email, password) =>
-    requests.post('/users/login/', { user: { email, password } }),
+    requests.post('users/login/', { user: { email, password } }),
   //signup request
   signup: (username, email, password) =>
-    requests.post('/users/signup/', { user: { username, email, password } }),
+    requests.post('users/signup/', { user: { username, email, password } }),
   //update request
   save: user =>
-    requests.put('/users/update/', { user })
+    requests.put('users/update/', { user })
 };
 
 
@@ -52,77 +57,60 @@ const omitSlug = article => Object.assign({}, article, { slug: undefined })
 
 const Articles = {
   all: page =>
-    requests.get(`/articles?${limit(10, page)}`),
-  byAuthor: (author, page) =>
-    requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
+    requests.get(`articles?${limit(10, page)}`),
   del: slug =>
-    requests.del(`/articles/${slug}`),
-  favorite: slug =>
-    requests.post(`/articles/${slug}/favorite`),
-  favoritedBy: (author, page) =>
-    requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
-  feed: () =>
-    requests.get('/articles/feed?limit=10&offset=0'),
+    requests.del(`articles/${slug}`),
   get: slug =>
     requests.get(`/articles/${slug}`),
-  unfavorite: slug =>
-    requests.del(`/articles/${slug}/favorite`),
   update: article =>
     requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
   create: article =>
     requests.post('/articles', { article })
 };
-// all : page => {
-  //     requests.get(`/polls?${limit(6 , page)}`)
-  // },
-// create : () => {
-  //   requests.post('/polls/');
-  // },
-  // delete : (slug) => {
-  //   requests.del(`/polls?${slug}`);
-  // },
+
 const Polls = {
   all : () => 
-    requests.get('/polls/'),
+    requests.get('polls/'),
   get : () => 
-    requests.get('/polls/'),
+    requests.get('polls/'),
   create : (poll) => 
-    requests.post('/polls/' , {poll}) ,
+    requests.post('polls/' , {poll}) ,
 }
 
 const Posts = {
   all: () =>
-    requests.get(`/posts/`),
+    requests.get(`posts/`),
   get: slug =>
-    requests.get(`/articles/${slug}`),
+    requests.get(`articles/${slug}`),
   del: slug =>
-    requests.del(`/articles/${slug}`),
+    requests.del(`articles/${slug}`),
 }
 
 const Choices = {
   forPoll : (slug) => {
-    requests.get(`/polls/${slug}/`);
+    requests.get(`polls/${slug}/`);
   },
   create : (slug ,choice) => {
-    requests.post(`/polls/${slug}/comments`, {choice});
+    requests.post(`polls/${slug}/comments`, {choice});
   },
   del : (slug , id) => {
-    requests.del(`/polls/${slug}/comments/${id}`);
+    requests.del(`polls/${slug}/comments/${id}`);
   }
 }
 
 const Comments = {
   create: (slug, comment) =>
-    requests.post(`/articles/${slug}/comments`, { comment }),
+    requests.post(`articles/${slug}/comments`, { comment }),
   delete: (slug, commentId) =>
-    requests.del(`/articles/${slug}/comments/${commentId}`),
+    requests.del(`articles/${slug}/comments/${commentId}`),
   forArticle: slug =>
-    requests.get(`/articles/${slug}/comments`)
+    requests.get(`articles/${slug}/comments`)
 };
 
 
 
 export default {
+  Home,
   Auth,
   Polls ,
   Posts,

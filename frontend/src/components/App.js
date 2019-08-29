@@ -3,25 +3,30 @@ import Header from './Header';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { APP_LOAD, REDIRECT } from '../constants/actionTypes';
 import { Route, Switch } from 'react-router-dom';
 import Article from '../components/Article';
 import Editor from '../components/Editor';
 import Home from '../components/Home';
 import Login from '../components/Login';
-
 import Register from '../components/Register';
 import Settings from '../components/Settings';
 
 import { store } from '../store';
 import { push } from 'react-router-redux';
+import { 
+  APP_LOAD, 
+  REDIRECT,
+ } from '../constants/actionTypes';
+import PostsList from './PostsList';
+
 
 const mapStateToProps = state => {
   return {
     appLoaded: state.common.appLoaded,
     appName: state.common.appName,
     currentUser: state.common.currentUser,
-    redirectTo: state.common.redirectTo
+    redirectTo: state.common.redirectTo,
+    ping : state.common.ping,
   }};
 
 const mapDispatchToProps = dispatch => ({
@@ -34,7 +39,6 @@ const mapDispatchToProps = dispatch => ({
 class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
-      // this.context.router.replace(nextProps.redirectTo);
       store.dispatch(push(nextProps.redirectTo));
       this.props.onRedirect();
     }
@@ -45,12 +49,12 @@ class App extends React.Component {
     if (token) {
       agent.setToken(token);
     }
-
-    this.props.onLoad(token ? agent.Auth.current() : null, token);
+    this.props.onLoad([token ? agent.Auth.current() : null, agent.Home.ping()], token );
   }
 
   render() {
-    if (this.props.appLoaded) {
+    if ( this.props.appLoaded) {
+      console.log(this.props.ping)
       return (
         <div>
           <Header
@@ -63,9 +67,8 @@ class App extends React.Component {
               <Route path="/editor/:slug" component={Editor} />
               <Route path="/editor" component={Editor} />
               <Route path="/article/:id" component={Article} />
-              <Route path="/settings" component={Settings} />
-             
               
+              <Route path="/settings" component={Settings} />
             </Switch>
         </div>
       );

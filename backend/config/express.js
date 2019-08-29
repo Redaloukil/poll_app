@@ -18,6 +18,7 @@ const winston = require('winston');
 const helpers = require('view-helpers');
 const config = require('./');
 const pkg = require('../package.json');
+const cors = require('cors')
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -29,7 +30,7 @@ module.exports = function(app, passport) {
   
   
 
- 
+  app.use(cors());
   app.use(helmet());
 
   // Compression middleware (should be placed before express.static)

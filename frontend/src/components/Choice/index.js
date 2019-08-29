@@ -7,8 +7,8 @@ import {
 
 const mapDispatchToProps = dispatch => ({
 
-    onSelectChoice: payload =>
-      dispatch({ type: , payload })
+    // onSelectChoice: payload =>
+    //   dispatch({ type: , payload })
 });
 
 class Choice extends React.Component {
@@ -20,8 +20,7 @@ class Choice extends React.Component {
     render(){
         return (
             <div className="vote-choice">
-                <label>{props.text}</label>
-                <button onClick={this.props.onVote}></button>
+               
             </div>
         )
     }

@@ -1,10 +1,7 @@
 import { 
     POLL_PAGE_LOADED , 
     POLL_PAGE_UNLOADED ,
-    CHOICE_ADDED , 
-    CHOICE_DELETED ,
-    POLL_SUBMITTED, 
-    POLL_DELETED } from '../constants/actionTypes';
+} from '../constants/actionTypes';
 
 
 export default (state = {}, action) => {
