@@ -32,7 +32,7 @@ const requests = {
 
 const Home = {
   ping:()=> {
-    requests.get('')
+    requests.get('');
   }
 }
 
@@ -42,10 +42,10 @@ const Auth = {
     requests.get('users/current/'),
   //login request
   login: (email, password) =>
-    requests.post('users/login/', { user: { email, password } }),
+    requests.post('users/login/', {  email, password } ),
   //signup request
   signup: (username, email, password) =>
-    requests.post('users/signup/', { user: { username, email, password } }),
+    requests.post('users/signup/', { username, email, password } ),
   //update request
   save: user =>
     requests.put('users/update/', { user })
@@ -73,17 +73,19 @@ const Polls = {
     requests.get('polls/'),
   get : () => 
     requests.get('polls/'),
-  create : (poll) => 
+  create : ({poll}) => 
     requests.post('polls/' , {poll}) ,
 }
 
 const Posts = {
   all: () =>
     requests.get(`posts/`),
-  get: slug =>
-    requests.get(`articles/${slug}`),
+  get: id =>
+    requests.get(`posts/${id}`),
   del: slug =>
-    requests.del(`articles/${slug}`),
+    requests.del(`posts/${slug}`),
+  create : ({post}) => 
+    requests.post(`posts/`,{post})
 }
 
 const Choices = {

@@ -29,8 +29,8 @@ export default (state = defaultState, action) => {
         ...state,
         token: action.token || null,
         appLoaded: true,
-        currentUser: action.payload ? action.payload.user : null,
-        ping: action.ping ? true : false,
+        currentUser: action.payload[0] ? action.payload.user : null,
+        ping: action.payload[1] ? true : null,
         
       };
     case REDIRECT:

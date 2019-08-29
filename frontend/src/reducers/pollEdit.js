@@ -15,7 +15,7 @@ export default (state = {}, action) => {
       };
     case POLL_EDITOR_PAGE_UNLOADED:
       return {
-
+        
       };
     case UPDATE_FIELD_EDITOR:
       return {

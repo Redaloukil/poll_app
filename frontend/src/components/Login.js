@@ -4,6 +4,7 @@ import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import {
+  LOGIN_PAGE_LOADED,
   UPDATE_FIELD_AUTH,
   LOGIN,
   LOGIN_PAGE_UNLOADED
@@ -12,6 +13,8 @@ import {
 const mapStateToProps = state => ({ ...state.auth });
 
 const mapDispatchToProps = dispatch => ({
+  onLoad : () => 
+    dispatch({type : LOGIN_PAGE_LOADED }),
   onChangeEmail: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
   onChangePassword: value =>
@@ -40,6 +43,12 @@ class Login extends React.Component {
     
   }
 
+  componentWillMount(){
+    
+    this.props.onLoad();
+   
+  }
+
   componentWillUnmount() {
     this.props.onUnload();
   }
@@ -47,7 +56,9 @@ class Login extends React.Component {
   render() {
     const email = this.props.email;
     const password = this.props.password;
+    
     return (
+      
       <div className="auth-page">
         <div className="container page">
           <div className="row">
@@ -61,8 +72,8 @@ class Login extends React.Component {
               </p>
 
               <ListErrors errors={this.props.errors} />
-
-              <form onSubmit={this.submitForm(email, password)}>
+      
+              <form onSubmit={this.submitForm(email, password)} autocomplete="off">
                 <fieldset>
 
                   <fieldset className="form-group">
@@ -72,7 +83,7 @@ class Login extends React.Component {
                       placeholder="Email"
                       value={email}
                       onChange={this.changeEmail} 
-                      defaultValue={null}/>
+                      />
                   </fieldset>
 
                   <fieldset className="form-group">
@@ -82,7 +93,7 @@ class Login extends React.Component {
                       placeholder="Password"
                       value={password}
                       onChange={this.changePassword} 
-                      defaultValue={null}/>
+                      defaultValue=""/>
                   </fieldset>
 
                   <button

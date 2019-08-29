@@ -51,7 +51,7 @@ module.exports = function(app) {
   /**
     * User routers
   */
-  // app.get('/users/', userController.search);
+  app.get('/users/', userController.search);
   // app.patch('/users/:id',authenticate ,userController.update);
   // app.get('/users/',userController.search);
   
