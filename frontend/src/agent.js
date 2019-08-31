@@ -40,11 +40,11 @@ const Auth = {
   current: () =>
     requests.get('users/current/'),
   //login request
-  login: (email, password) =>
-    requests.post('users/login/', {  email, password } ),
+  login: (username, password) =>
+    requests.post('users/login/', {  username, password } ),
   //signup request
-  signup: (username, email, password) =>
-    requests.post('users/signup/', { username, email, password } ),
+  signup: (username, password) =>
+    requests.post('users/signup/', { username, password } ),
   //update request
   save: user =>
     requests.put('users/update/', { user })

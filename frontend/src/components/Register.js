@@ -13,23 +13,14 @@ import {
 const mapStateToProps = state => ({ ...state.auth });
 
 const mapDispatchToProps = dispatch => ({
-
-  onChangeEmail: value =>
-    dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
-  
   onChangeUsername: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'username', value }),
-  
   onChangePassword: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
-  
-  onChangeCPassword: value =>
+  onchangeCPassword: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'cpassword', value }),
-  
-  onSubmit: (username, email, password) => {
-    dispatch({ type: REGISTER, payload : agent.Auth.register(username, email, password) } )
-  },
-  
+  onSubmit: (username, password) => 
+    dispatch({ type: REGISTER, payload:agent.Auth.signup  (username,password) }),
   onUnload: () =>
     dispatch({ type: REGISTER_PAGE_UNLOADED })
 });
@@ -42,7 +33,6 @@ class Register extends React.Component {
       }
     }
     
-    this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
     this.changeUsername = ev => this.props.onChangeUsername(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
     this.changeCPassword = ev => this.props.onchangeCPassword(ev.target.value);
@@ -50,18 +40,22 @@ class Register extends React.Component {
     //Validation of register form fields
     this.validate = () => {
       const errors = {};
-      if( this.state.username.length === 0 ) errors.username = "Invalid username";
-      if( this.state.email.length === 0 ) errors.email = "Invalid email";
-      if( this.state.password.length === 0 && this.state.password === this.state.cpassword) errors.password = "Invalid password";
+      if( this.props.username.length === 0 ) errors.username = "Invalid username";
+      if( this.props.password.length === 0 ) errors.password = "Invalid password";
+      if(this.props.password === this.props.cpassword) errors.cpassword = "Invalid password confirmation";
       return errors;
     }
 
     //Submit of register form fields
     this.submitForm = (username , email, password) => ev => {
+      console.log("submitted");
       ev.preventDefault();
       const errors = this.validate();
-      if(Object.keys(errors).length == 0){
-        this.props.onSubmit(username, email, password);
+      console.log("submitted1");
+      this.setState({errors})
+      if(Object.keys(this.state.errors).length === 0){
+        console.log("submitted2");
+        this.props.onSubmit(username,password);
       }
     }
   }
@@ -72,7 +66,6 @@ class Register extends React.Component {
 
   render() {
     const username = this.props.username;
-    const email = this.props.email;
     const password = this.props.password;
     const cpassword = this.props.cpassword;
     
@@ -93,7 +86,7 @@ class Register extends React.Component {
 
               <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(username, email, password)}>
+              <form onSubmit={this.submitForm(username,password)}>
                 <fieldset>
                   <fieldset className="form-group">
                     <input
@@ -104,17 +97,7 @@ class Register extends React.Component {
                       onChange={this.changeUsername} 
                       defaultValue=""/>
                   </fieldset>
-                  { this.state.username ? <span></span> : <span></span> }
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={this.changeEmail} 
-                      defaultValue=""/>
-                  </fieldset>
-                  { this.state.email ? <span></span> : <span></span> }
+                  { this.state.errors.username ? <span></span> : null }
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
@@ -124,7 +107,7 @@ class Register extends React.Component {
                       onChange={this.changePassword} 
                       defaultValue=""/>
                   </fieldset>
-                  { this.state.password ? <span></span> : <span></span> }
+                  { this.state.errors.password ? <span></span> : null }
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
@@ -134,7 +117,7 @@ class Register extends React.Component {
                       onChange={this.changeCPassword} 
                       defaultValue=""/>
                   </fieldset>
-                  { this.state.cpassword ? <span></span> :null }
+                  { this.state.errors.cpassword ? <span></span> :null }
                   <button
                     className="btn btn-lg btn-primary pull-xs-right"
                     type="submit"
@@ -154,8 +137,8 @@ class Register extends React.Component {
 
 Register.contextTypes = {
   username : PropTypes.string.isRequired,
-  email : PropTypes.string.isRequired,
-  password:PropTypes.string
+  password:PropTypes.string.isRequired,
+  cpassword : PropTypes.string.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

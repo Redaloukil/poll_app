@@ -69,5 +69,8 @@ function listen() {
 function connect() {
   var options = { keepAlive: 1, useNewUrlParser: true };
   mongoose.connect(config.db, options);
+  mongoose.set('useNewUrlParser', true);
+  mongoose.set('useFindAndModify', false);
+  mongoose.set('useCreateIndex', true);
   return mongoose.connection;
 }

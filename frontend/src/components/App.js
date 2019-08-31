@@ -52,7 +52,7 @@ class App extends React.Component {
   }
 
   render() {
-    if ( this.props.appLoaded) {
+    if (this.props.appLoaded) {
       return (
         <div>
           <Header

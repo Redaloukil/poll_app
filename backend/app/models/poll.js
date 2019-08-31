@@ -30,7 +30,7 @@ const ChoiceSchema = new Schema({
 const PollSchema = new Schema({
   title: {type: String, required:true },
   description: {type: String, required:true },
-  user : {type : Schema.Types.ObjectId , ref : 'User' },
+  user : {type : Schema.Types.ObjectId ,ref:'User'},
 });
 
 /**

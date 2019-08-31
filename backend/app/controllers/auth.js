@@ -1,29 +1,30 @@
 const { User } = require('../models/user');
+const jwt = require('jsonwebtoken');
+const Constants = require('./../../utils/constants');
 
 
 const login = async (req , res , next) => {
-    const { email , password } = req.body;
+    const { username , password } = req.body;
     try {
         const user = await User.findOne({ username });
-        if (!user) {
-          const err = new Error('Please verify your credentials.');
-          err.status = 401;
-          next(err);
+        if (!user || !user.authenticate(password)) {
+            const err = new Error('Please verify your credentials.');
+            err.status = 401;
+            return next(err);
         }
-        user.token = "hello world this is me";
-        res.status(200).json({ 
-            user : {
-                ...user,
-            } 
-        });
+        else {
+            const token = ""
+            res.json({token}).status(200);
+        }
+        
     }catch (err) {
         next(err);
     }
 }
 
 const signup = async (req , res ,next ) => {
-    const { name , email , password } = req.body;
-    const createdUser = new User({ name , email ,password})
+    const { username , password } = req.body;
+    const createdUser = new User({ username , password})
     try {
           const user = await createdUser.save();
           if(!user) {
@@ -50,7 +51,7 @@ const current = async (req , res , next) => {
             return next(err);
         }
         const token = current.generateToken();
-        res.status(200).json({ token });
+        res.status(200).json({ token })
 
     } catch(err) {
           err.status = 400;

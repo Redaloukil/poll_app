@@ -56,6 +56,9 @@ class Login extends React.Component {
   render() {
     const email = this.props.email;
     const password = this.props.password;
+    const errors = {
+      ...this.props.errors,
+    }
     
     return (
       
@@ -71,8 +74,8 @@ class Login extends React.Component {
                 </Link>
               </p>
 
-              <ListErrors errors={this.props.errors} />
-      
+              <ListErrors errors={errors} />
+              
               <form onSubmit={this.submitForm(email, password)} autocomplete="off">
                 <fieldset>
 
