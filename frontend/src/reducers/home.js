@@ -8,7 +8,7 @@ export default (state = {}, action) => {
     case HOME_PAGE_LOADED:
       return {
         ...state,
-        
+        polls:action.payload,
       };
     case HOME_PAGE_UNLOADED:
       return {};

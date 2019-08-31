@@ -6,7 +6,6 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 const API_ROOT = 'http://localhost:3000/';
 
-const encode = encodeURIComponent;
 const responseBody = res => res.body;
 
 //set default token to null 
@@ -55,18 +54,18 @@ const Auth = {
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
 const omitSlug = article => Object.assign({}, article, { slug: undefined })
 
-const Articles = {
-  all: page =>
-    requests.get(`articles?${limit(10, page)}`),
-  del: slug =>
-    requests.del(`articles/${slug}`),
-  get: slug =>
-    requests.get(`/articles/${slug}`),
-  update: article =>
-    requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
-  create: article =>
-    requests.post('/articles', { article })
-};
+// const Articles = {
+//   all: page =>
+//     requests.get(`articles?${limit(10, page)}`),
+//   del: slug =>
+//     requests.del(`articles/${slug}`),
+//   get: slug =>
+//     requests.get(`/articles/${slug}`),
+//   update: article =>
+//     requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
+//   create: article =>
+//     requests.post('/articles', { article })
+// };
 
 const Polls = {
   all : () => 
@@ -117,7 +116,6 @@ export default {
   Polls ,
   Posts,
   Choices,
-  Comments,
-  
+  // Comments,
   setToken: _token => { token = _token; }
 };

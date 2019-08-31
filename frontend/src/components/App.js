@@ -4,7 +4,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import Article from '../components/Article';
 import Editor from '../components/Editor';
 import Home from '../components/Home';
 import Login from '../components/Login';
@@ -17,7 +16,7 @@ import {
   APP_LOAD, 
   REDIRECT,
  } from '../constants/actionTypes';
-import PostsList from './PostsList';
+
 
 
 const mapStateToProps = state => {
@@ -49,7 +48,7 @@ class App extends React.Component {
     if (token) {
       agent.setToken(token);
     }
-    this.props.onLoad(Promise.all([token ? agent.Auth.current() : null ,agent.Home.ping()]), token );
+    this.props.onLoad(Promise.all([token ? agent.Auth.current() : null ,null]), token );
   }
 
   render() {
@@ -65,7 +64,6 @@ class App extends React.Component {
               <Route path="/register" component={Register} />
               <Route path="/editor/:slug" component={Editor} />
               <Route path="/editor" component={Editor} />
-              <Route path="/article/:id" component={Article} />
               <Route path="/settings" component={Settings} />
             </Switch>
         </div>

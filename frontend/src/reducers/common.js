@@ -10,7 +10,6 @@ import {
   ARTICLE_PAGE_UNLOADED,
   EDITOR_PAGE_UNLOADED,
   HOME_PAGE_UNLOADED,
- 
   SETTINGS_PAGE_UNLOADED,
   LOGIN_PAGE_UNLOADED,
   REGISTER_PAGE_UNLOADED
@@ -29,9 +28,7 @@ export default (state = defaultState, action) => {
         ...state,
         token: action.token || null,
         appLoaded: true,
-        currentUser: action.payload[0] ? action.payload.user : null,
-        ping: action.payload[1] ? true : null,
-        
+        currentUser: action.payload ? action.payload.user : null,
       };
     case REDIRECT:
       return { ...state, redirectTo: null };
@@ -52,7 +49,7 @@ export default (state = defaultState, action) => {
         ...state,
         redirectTo: action.error ? null : '/',
         token: action.error ? null : action.payload.user.token,
-        currentUser: action.error ? null : action.payload.user
+        currentUser: action.error ? null : action.payload.user,
       };
     case DELETE_ARTICLE:
       return { ...state, redirectTo: '/' };

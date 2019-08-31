@@ -1,6 +1,6 @@
 const { Poll , Choice } = require('../models/poll');
 
-const createC = async (req , res , next) => {
+const createChoice = async (req , res , next) => {
     const { title , description } = req.body;
     const newChoice = new choice({ 
         title , 
@@ -12,7 +12,7 @@ const createC = async (req , res , next) => {
 
     }
 }
-const deleteC = async (req , res , next) => {
+const deleteChoice = async (req , res , next) => {
     const { poll , choice } = req.body;
     try {
         //find poll 
@@ -28,7 +28,7 @@ const deleteC = async (req , res , next) => {
     }
 }
 
-const selectC = async ( req , res , next ) => {
+const selectChoice = async ( req , res , next ) => {
 
 }
 

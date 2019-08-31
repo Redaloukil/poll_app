@@ -1,23 +1,22 @@
-import article from './reducers/article';
-import articleList from './reducers/articleList';
 import auth from './reducers/auth';
 import { combineReducers } from 'redux';
 import common from './reducers/common';
-import editor from './reducers/editor';
 import home from './reducers/home';
 
 import settings from './reducers/settings';
 import pollsList from './reducers/pollsList';
+import postsList from './reducers/postsList';
 import { routerReducer } from 'react-router-redux';
 
 export default combineReducers({
-  article,
-  articleList,
-  pollsList,
+  // article,
+  // articleList,
   auth,
   common,
-  editor,
+  // editor,
   home,
   settings,
+  pollsList,
+  postsList,
   router: routerReducer
 });

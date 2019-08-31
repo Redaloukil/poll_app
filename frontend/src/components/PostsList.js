@@ -17,12 +17,7 @@ const PostsList = props => {
     }
     return (
         <div className="page" id="posts">
-            this.props.posts.map((post) =>{
-                <div className="posts">
-                    
-                </div>
-            })
-
+           
 
             
         </div>

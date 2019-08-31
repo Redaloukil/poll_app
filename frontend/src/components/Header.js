@@ -11,6 +11,18 @@ const LoggedOutView = props => {
             Home
           </Link>
         </li>
+        
+        <li className="nav-item">
+          <Link to="/polls" className="nav-link">
+            Polls
+          </Link>
+        </li>
+        
+        <li className="nav-item">
+          <Link to="/posts" className="nav-link">
+            Posts 
+          </Link>
+        </li>
 
         <li className="nav-item">
           <Link to="/login" className="nav-link">
@@ -40,7 +52,16 @@ const LoggedInView = props => {
             Home
           </Link>
         </li>
-
+        <li className="nav-item">
+          <Link to="/polls" className="nav-link">
+            Polls
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/posts" className="nav-link">
+            Posts 
+          </Link>
+        </li>
         <li className="nav-item">
           <Link to="/editor" className="nav-link">
             <i className="ion-compose"></i>&nbsp;New Post

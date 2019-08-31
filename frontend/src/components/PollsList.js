@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import poll from '../reducers/poll';
+
 
 const PollsList = props => {
     if (!props.polls){
@@ -19,8 +18,7 @@ const PollsList = props => {
         <div>
             this.props.polls.map((poll) =>{
                 <div className="home-poll">
-                    <h1><Link to="">{poll.title}</Link></h1>
-                    <p>{poll.description}</p>
+                    <p>poll</p>
                 </div>
             })
 

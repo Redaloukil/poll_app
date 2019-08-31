@@ -64,25 +64,16 @@ UserSchema
  * Methods
  */
 
-UserSchema.method({
+UserSchema.methods = {
   getPosts() {
       return Post.find({ _user: this._id });
   },  
-  /**
-   * Authenticate - check if the passwords are the same
-   * @public
-   * @param {String} password
-   * @return {Boolean} passwords match
-   */
+  
   authenticate(password) {
       return bcryptjs.compareSync(password, this.password);
   },
 
-  /**
-   * Generates a JSON Web token used for route authentication
-   * @public
-   * @return {String} signed JSON web token
-   */
+  
   generateToken() {
       return jwt.sign({ _id: this._id }, Constants.security.sessionSecret, {
         expiresIn: Constants.security.sessionExpiration,
@@ -90,7 +81,7 @@ UserSchema.method({
   },
 
   storePassword(password){
-    this.password = bcryptjs.hashSync() 
+    this.password = bcryptjs.hashSync(password); 
   },
 
   /**
@@ -106,7 +97,7 @@ UserSchema.method({
   },
   
 
-});
+};
 
 /**
  * Statics

@@ -51,24 +51,23 @@ module.exports = function(app) {
   /**
     * User routers
   */
-  app.get('/users/', userController.search);
-  // app.patch('/users/:id',authenticate ,userController.update);
-  // app.get('/users/',userController.search);
-  
+  app.get('/users/' , userController.search);
+  app.patch('/users/:id', userController.update);
+  // app.delete('/users/:id' , authenticate , userController.delete);
   
   /**
     * Poll routers
   */
-  // app.get('/polls/' , authenticate ,  pollController.search);
+  app.get('/polls/' ,  pollController.search);
   // app.get('/polls/:id', authenticate , pollController.detail);
   // app.patch('/polls/:id' ,authenticate ,pollController.update);
   // app.post('/polls/' , authenticate , pollController.create);
   // app.get('/polls/:id/choices/' , authenticate , pollController.searchChoices );
   // app.post('/polls/:id/choices/' , authenticate , pollController.createChoice);
   
-  // /**
-  //  * Post routers
-  // */
+  /**
+   * Post routers
+  */
   // app.get('/posts/', authenticate , userController.search);
   // app.get('/posts/:id', authenticate ,userController.detail);
   // app.patch('/posts/:id', authenticate ,userController.update);
