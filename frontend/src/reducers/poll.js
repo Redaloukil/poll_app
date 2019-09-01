@@ -11,6 +11,7 @@ export default (state = {}, action) => {
         ...state,
         poll: action.error ? null : action.payload,
         error : action.error ? null : action.error,
+        redirecTo : action.error ? '/404': null ,
       };
     case POLL_PAGE_UNLOADED:
       return {

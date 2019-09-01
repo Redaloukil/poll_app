@@ -4,12 +4,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import Editor from '../components/Editor';
-import Home from '../components/Home';
-import Login from '../components/Login';
-import Register from '../components/Register';
+import Editor from '.Editor';
+import Home from './Home';
+import Login from './Login';
+import Register from './Register';
 import Settings from '../components/Settings';
-
+import NotFound from './Errors/Notfound';
 import { store } from '../store';
 import { push } from 'react-router-redux';
 import { 
@@ -48,7 +48,7 @@ class App extends React.Component {
     if (token) {
       agent.setToken(token);
     }
-    this.props.onLoad(Promise.all([token ? agent.Auth.current() : null ,null]), token );
+    this.props.onLoad(Promise.all(token ? agent.Auth.current() : null ), token );
   }
 
   render() {
@@ -61,10 +61,11 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route path="/login" component={Login}/>
-              <Route path="/register" component={Register} />
-              <Route path="/editor/:slug" component={Editor} />
-              <Route path="/editor" component={Editor} />
-              <Route path="/settings" component={Settings} />
+              <Route path="/register" component={Register}/>
+              <Route path="/editor/:slug" component={Editor}/>
+              <Route path="/editor" component={Editor}/>
+              <Route path="/settings" component={Settings}/>
+              <Route path="/404" component={NotFound}/>
             </Switch>
         </div>
       );

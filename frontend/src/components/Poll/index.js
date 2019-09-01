@@ -34,17 +34,20 @@ class Poll extends React.Component {
     render(){
         if (!this.props.poll) {
             return (
-                <div>loading..</div>
+                <div>Does Not Exist</div>
             )
-        }else {
-            return(
+        }
+        if(!this.props.poll){
+            
+        }
+        return(
                 <div>
                     <PollAction/>
                     <PollInfos/>
                     <PollChoices/>
                 </div>
-            )
-        }
+        )
+       
         
     }
 }
