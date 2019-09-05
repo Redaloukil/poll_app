@@ -9,6 +9,7 @@ const home = (req , res ) => {
     // res.json({"Api name": name ,"Version" : version });
     res.json({
         version: version,
+        name : name,
     }).status(200);
     
 }

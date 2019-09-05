@@ -3,9 +3,7 @@ import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import {
-  ADD_TAG,
   EDITOR_PAGE_LOADED,
-  REMOVE_TAG,
   ARTICLE_SUBMITTED,
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR
@@ -16,12 +14,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAddTag: () =>
-    dispatch({ type: ADD_TAG }),
   onLoad: payload =>
     dispatch({ type: EDITOR_PAGE_LOADED, payload }),
-  onRemoveTag: tag =>
-    dispatch({ type: REMOVE_TAG, tag }),
   onSubmit: payload =>
     dispatch({ type: ARTICLE_SUBMITTED, payload }),
   onUnload: payload =>
@@ -30,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: UPDATE_FIELD_EDITOR, key, value })
 });
 
-class Editor extends React.Component {
+class PostEditor extends React.Component {
   constructor() {
     super();
 
@@ -38,27 +32,12 @@ class Editor extends React.Component {
       key => ev => this.props.onUpdateField(key, ev.target.value);
     this.changeTitle = updateFieldEvent('title');
     this.changeDescription = updateFieldEvent('description');
-    this.changeBody = updateFieldEvent('body');
-    this.changeTagInput = updateFieldEvent('tagInput');
-
-    this.watchForEnter = ev => {
-      if (ev.keyCode === 13) {
-        ev.preventDefault();
-        this.props.onAddTag();
-      }
-    };
-
-    this.removeTagHandler = tag => () => {
-      this.props.onRemoveTag(tag);
-    };
-
+    
     this.submitForm = ev => {
       ev.preventDefault();
       const article = {
         title: this.props.title,
         description: this.props.description,
-        body: this.props.body,
-        tagList: this.props.tagList
       };
 
       const slug = { slug: this.props.articleSlug };
@@ -121,41 +100,6 @@ class Editor extends React.Component {
                       onChange={this.changeDescription} />
                   </fieldset>
 
-                  <fieldset className="form-group">
-                    <textarea
-                      className="form-control"
-                      rows="8"
-                      placeholder="Write your article (in markdown)"
-                      value={this.props.body}
-                      onChange={this.changeBody}>
-                    </textarea>
-                  </fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Enter tags"
-                      value={this.props.tagInput}
-                      onChange={this.changeTagInput}
-                      onKeyUp={this.watchForEnter} />
-
-                    <div className="tag-list">
-                      {
-                        (this.props.tagList || []).map(tag => {
-                          return (
-                            <span className="tag-default tag-pill" key={tag}>
-                              <i  className="ion-close-round"
-                                  onClick={this.removeTagHandler(tag)}>
-                              </i>
-                              {tag}
-                            </span>
-                          );
-                        })
-                      }
-                    </div>
-                  </fieldset>
-
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="button"
@@ -175,4 +119,4 @@ class Editor extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor);
+export default connect(mapStateToProps, mapDispatchToProps)(PostEditor);

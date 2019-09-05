@@ -5,7 +5,7 @@ services:
     image: mongo
     restart: always
     ports:
-      - 27018:27018
+      - 27017:27017
     volumes:
       - ./backend/data:/data/db
   react:
@@ -25,7 +25,7 @@ services:
         dockerfile: ./docker/Dockerfile
     volumes:
       - ./backend:/app
-    command: /usr/local/wait-for-it.sh mongo:27018 -- npm start
+    command: /usr/local/wait-for-it.sh mongo:27017 -- npm start
     env_file:
       - ./backend/.env
     ports:

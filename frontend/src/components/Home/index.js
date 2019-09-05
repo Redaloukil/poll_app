@@ -38,7 +38,6 @@ class Home extends React.Component {
     return (
       <div className="home-page">
         <div className="container">
-          { this.props.polls ? <h1>Yes</h1> : <h1>No</h1>}
           <h1>HOME PAGE</h1>
           <PollsList polls={this.props.polls}/>
         </div>

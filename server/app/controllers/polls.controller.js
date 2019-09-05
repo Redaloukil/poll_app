@@ -6,13 +6,13 @@ class PollController extends BaseController {
     search = async (req, res, next) => {
         try {
           const polls = await Post.find({})
-        //   .populate({ path: '_user', select: '-posts -role' });
-    
           res.json(polls);
         } catch(err) {
           next(err);
         }
     }
+    
+    
 
     create = async (req, res, next) => {
         const { title , description } = req.body;
@@ -31,7 +31,7 @@ class PollController extends BaseController {
         } catch (err) {
           next(err);
         }
-      }
+    }
 }
 
 export default PollController

@@ -2,13 +2,12 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const Choice = new Schema ({
+const ChoiceSchema = new Schema ({
     description : {
         type : String,
         required : true,
     },
     count : {
-        //type to change 
         type : text , 
         required : true
     },
@@ -32,5 +31,10 @@ const PollSchema = new Schema({
 });
 
 const PollModel = mongoose.model('Poll', PollSchema);
+const ChoiceModel = mongoose.model('Choice' , ChoiceSchema);
 
-export default PollModel;
+
+export default {
+  Poll : PollModel,
+  Choice :ChoiceModel,
+};

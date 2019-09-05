@@ -7,16 +7,13 @@ const login = async (req , res , next) => {
     const { username , password } = req.body;
     try {
         const user = await User.findOne({ username });
-        if (!user || !user.authenticate(password)) {
+        if (!user || !user.authenticate(password)){
             const err = new Error('Please verify your credentials.');
             err.status = 401;
             return next(err);
         }
-        else {
-            const token = ""
-            res.json({token}).status(200);
-        }
-        
+        const token = user.generateToken();
+        res.json({token}).status(200);
     }catch (err) {
         next(err);
     }
@@ -24,25 +21,35 @@ const login = async (req , res , next) => {
 
 const signup = async (req , res ,next ) => {
     const { username , password } = req.body;
-    const createdUser = new User({ username , password})
+    console.log(username , password);
+    
+    let createdUser = new User(
+        { 
+            username , 
+            password ,
+            provider: 'local',
+        }
+    )
+    
     try {
-          const user = await createdUser.save();
-          if(!user) {
+        
+        const user = await createdUser.save();
+        if(!user) {
             const err = new Error('Please verify your credentials.');
             err.status = 401;
             return next(err);
-          } 
-          const token = user.generateToken();
-          res.status(201).json({ token });
-
+        } 
+        const token = user.generateToken();
+        res.status(201).json({ token });
     } catch(err) {
-          err.status = 400;
+          err.status = 401;
           next(err);
     }
 }
 
+
 const current = async (req , res , next) => {
-    const { email , password } = req.body;
+    const { username , password } = req.currentUser;
     try {
         const current = await User.findOne({email});    
         if(!current){

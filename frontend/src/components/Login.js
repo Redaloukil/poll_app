@@ -15,8 +15,8 @@ const mapStateToProps = state => ({ ...state.auth });
 const mapDispatchToProps = dispatch => ({
   onLoad : () => 
     dispatch({type : LOGIN_PAGE_LOADED }),
-  onChangeEmail: value =>
-    dispatch({ type: UPDATE_FIELD_AUTH, key: 'email', value }),
+  onChangeUsername: value =>
+    dispatch({ type: UPDATE_FIELD_AUTH, key: 'username', value }),
   onChangePassword: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
   onSubmit: (email, password) =>
@@ -33,11 +33,11 @@ class Login extends React.Component {
         
       }
     }
-    this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
+    this.changeUsername = ev => this.props.onChangeUsername(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
-    this.submitForm = (email, password) => ev => {
+    this.submitForm = (username, password) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(email, password);
+      this.props.onSubmit(username, password);
     };
 
     
@@ -54,7 +54,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const email = this.props.email;
+    const username = this.props.username;
     const password = this.props.password;
     const errors = {
       ...this.props.errors,
@@ -76,16 +76,16 @@ class Login extends React.Component {
 
               <ListErrors errors={errors} />
               
-              <form onSubmit={this.submitForm(email, password)} autocomplete="off">
+              <form onSubmit={this.submitForm(username, password)} autocomplete="off">
                 <fieldset>
 
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={this.changeEmail} 
+                      type="text"
+                      placeholder="Username"
+                      value={username}
+                      onChange={this.changeUsername} 
                       />
                   </fieldset>
 
@@ -96,7 +96,7 @@ class Login extends React.Component {
                       placeholder="Password"
                       value={password}
                       onChange={this.changePassword} 
-                      defaultValue=""/>
+                      />
                   </fieldset>
 
                   <button

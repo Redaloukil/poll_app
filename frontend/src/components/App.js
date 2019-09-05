@@ -4,11 +4,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import Editor from '.Editor';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Settings from '../components/Settings';
+import PollEditor from '../components/EditPoll';
+import PostEditor from '../components/EditPost';
 import NotFound from './Errors/Notfound';
 import { store } from '../store';
 import { push } from 'react-router-redux';
@@ -48,7 +49,7 @@ class App extends React.Component {
     if (token) {
       agent.setToken(token);
     }
-    this.props.onLoad(Promise.all(token ? agent.Auth.current() : null ), token );
+    this.props.onLoad(Promise.all(token ? agent.Auth.current() : null , agent.Home.ping()), token );
   }
 
   render() {
@@ -62,8 +63,8 @@ class App extends React.Component {
               <Route exact path="/" component={Home}/>
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
-              <Route path="/editor/:slug" component={Editor}/>
-              <Route path="/editor" component={Editor}/>
+              <Route path="/poll-edit" component={PollEditor}/>
+              <Route path="/post-edit" component={PostEditor}/>
               <Route path="/settings" component={Settings}/>
               <Route path="/404" component={NotFound}/>
             </Switch>
