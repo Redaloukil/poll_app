@@ -34,7 +34,7 @@ const promiseMiddleware = store => next => action => {
         action.error = true;
         // return
         
-        // action.payload = error.response;
+        // action.payload = error;
         //Pseudo error object 
         action.payload = { 
           "errors":{

@@ -1,5 +1,6 @@
 const { Poll } = require('../models/poll');
 
+
 const search = async (req , res , err) => {
     try {
         const polls = await Poll.find()
@@ -12,6 +13,19 @@ const search = async (req , res , err) => {
     }
 }
 
+const detail = async (req , res , err) => {
+    const { id } = req.params;
+    try {
+        const poll = await Poll.findById(id)
+        if(!poll){
+            return res.status('404').json({'not found' : 'weli Radoi'});
+        }
+        return res.status('200').json(poll);
+    }catch {
+        throw err;
+    }
+}
+
 
 const update = async (req , res , err) => {
     const { title , description } = res.body;
@@ -19,7 +33,6 @@ const update = async (req , res , err) => {
 
 const create = async (req , res , next )=> {
     const { title , description } = req.body;
-
     const poll = new Poll({ 
         title , 
         description ,
@@ -28,6 +41,7 @@ const create = async (req , res , next )=> {
 
     try {
         res.status(201).json(await poll.save());
+        
     } catch(err) {
         next(err);
     }
@@ -38,5 +52,6 @@ const create = async (req , res , next )=> {
 module.exports = {
     search,
     create, 
-    update, 
+    update,
+    detail,
 }

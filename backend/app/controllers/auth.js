@@ -47,7 +47,9 @@ const signup = async (req , res ,next ) => {
 
 
 const current = async (req , res , next) => {
+    console.log("current called");
     const { username } = req.currentUser;
+    
     try {
         const current = await User.findOne({username});    
         if(!current){

@@ -46,7 +46,7 @@ module.exports = function(app) {
   */
   app.post('/users/login/'  ,authController.login);
   app.post('/users/signup/' ,authController.signup);
-  // app.post('/users/current/' ,authController.current);
+  app.post('/user/', authenticate , authController.current);
   
   /**
     * User routers
@@ -59,7 +59,7 @@ module.exports = function(app) {
     * Poll routers
   */
   app.get('/polls/' ,  pollController.search);
-  // app.get('/polls/:id', authenticate , pollController.detail);
+  app.get('/polls/:id', pollController.detail);
   // app.patch('/polls/:id' ,authenticate ,pollController.update);
   // app.post('/polls/' , authenticate , pollController.create);
   // app.get('/polls/:id/choices/' , authenticate , pollController.searchChoices );
