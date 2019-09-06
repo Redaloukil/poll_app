@@ -23,17 +23,15 @@ const signup = async (req , res ,next ) => {
     const { username , password } = req.body;
     console.log(username , password);
     
-    let createdUser = new User(
-        { 
+    let createdUser = new User({ 
             username , 
             password ,
             provider: 'local',
-        }
-    )
-    
+        })
     try {
         
         const user = await createdUser.save();
+        console.log(user.password)
         if(!user) {
             const err = new Error('Please verify your credentials.');
             err.status = 401;
@@ -49,9 +47,9 @@ const signup = async (req , res ,next ) => {
 
 
 const current = async (req , res , next) => {
-    const { username , password } = req.currentUser;
+    const { username } = req.currentUser;
     try {
-        const current = await User.findOne({email});    
+        const current = await User.findOne({username});    
         if(!current){
             const err = new Error('You are not authenticated');
             err.status = 401;

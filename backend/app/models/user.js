@@ -103,8 +103,7 @@ UserSchema.methods = {
      expiresIn: Constants.security.sessionExpiration,
    });
  },
-
- /**
+  /**
   * Create password hash
   * @private
   * @param {String} password

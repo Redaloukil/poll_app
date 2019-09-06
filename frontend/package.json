@@ -7,8 +7,10 @@
     "react-scripts": "1.1.1"
   },
   "dependencies": {
+    "@tanem/react-nprogress": "^2.0.5",
     "history": "^4.6.3",
     "marked": "^0.3.6",
+    "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
@@ -19,6 +21,7 @@
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.1",
+    "styled-components": "^4.3.2",
     "superagent": "^3.8.2",
     "superagent-promise": "^1.1.0"
   },

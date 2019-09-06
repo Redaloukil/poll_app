@@ -59,15 +59,17 @@ class App extends React.Component {
           <Header
             appName={this.props.appName}
             currentUser={this.props.currentUser} />
-            <Switch>
-              <Route exact path="/" component={Home}/>
-              <Route path="/login" component={Login}/>
-              <Route path="/register" component={Register}/>
-              <Route path="/poll-edit" component={PollEditor}/>
-              <Route path="/post-edit" component={PostEditor}/>
-              <Route path="/settings" component={Settings}/>
-              <Route path="/404" component={NotFound}/>
-            </Switch>
+           
+              <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="/login" component={Login}/>
+                <Route path="/register" component={Register}/>
+                <Route path="/poll-edit" component={PollEditor}/>
+                <Route path="/post-edit" component={PostEditor}/>
+                <Route path="/settings" component={Settings}/>
+                <Route path="/404" component={NotFound}/>
+              </Switch>
+            
         </div>
       );
     }

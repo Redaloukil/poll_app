@@ -47,14 +47,14 @@ class Register extends React.Component {
     }
 
     //Submit of register form fields
-    this.submitForm = (username , email, password) => ev => {
-      console.log("submitted");
+    this.submitForm = (username,password) => ev => {
       ev.preventDefault();
       const errors = this.validate();
-      console.log("submitted1");
+      
       this.setState({errors})
+      
       if(Object.keys(this.state.errors).length === 0){
-        console.log("submitted2");
+        
         this.props.onSubmit(username,password);
       }
     }
