@@ -3,13 +3,14 @@ import Header from './Header';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch , Redirect} from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Settings from '../components/Settings';
 import PollEditor from '../components/EditPoll';
 import PostEditor from '../components/EditPost';
+import Poll from '../components/Poll/index';
 import NotFound from './Errors/Notfound';
 import { store } from '../store';
 import { push } from 'react-router-redux';
@@ -56,21 +57,20 @@ class App extends React.Component {
     if (this.props.appLoaded) {
       return (
         <div>
-          <Header
-            appName={this.props.appName}
-            currentUser={this.props.currentUser} />
-           
-              <Switch>
+          <Header appName={this.props.appName} currentUser={this.props.currentUser} />
+          <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
+                <Route path="/polls/:id" component={Poll}/>
                 <Route path="/poll-edit" component={PollEditor}/>
                 <Route path="/post-edit" component={PostEditor}/>
                 <Route path="/settings" component={Settings}/>
                 <Route path="/404" component={NotFound}/>
-              </Switch>
-            
-        </div>
+                <Redirect from='*' to='/404' />
+
+          </Switch>
+      </div>
       );
     }
     return (

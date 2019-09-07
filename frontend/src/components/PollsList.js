@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 const PollsList = props => {
@@ -16,11 +17,17 @@ const PollsList = props => {
     }
     return (
         <div>
-            this.props.polls.map((poll) =>{
-                <div className="home-poll">
-                    <p>poll</p>
-                </div>
-            })
+
+            {props.polls.map((poll) =>{
+                return (
+                    <div className="home-poll">
+                        <h1>{poll.title}</h1>
+                        <p>{poll.description}</p>
+                        <Link to={`/polls/${poll.id}`}>Make a poll</Link>
+
+                    </div>
+                )
+            })}
 
 
             

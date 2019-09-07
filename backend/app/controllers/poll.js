@@ -3,24 +3,23 @@ const { Poll } = require('../models/poll');
 
 const search = async (req , res , err) => {
     try {
-        const polls = await Poll.find()
-        if(!polls){
-            return res.status('404').json({'not found' : 'weli Radoi'});
-        }
-        return res.status('200').json(polls);
-    }catch {
-        throw err;
-    }
+        const polls = await Poll.find({})
+        res.json(polls);
+      } catch(err) {
+        next(err);
+      }
 }
 
 const detail = async (req , res , err) => {
     const { id } = req.params;
+    console.log(id);
     try {
         const poll = await Poll.findById(id)
         if(!poll){
-            return res.status('404').json({'not found' : 'weli Radoi'});
+            res.status('404');
+              
         }
-        return res.status('200').json(poll);
+        res.status('200').json(poll);
     }catch {
         throw err;
     }
@@ -32,11 +31,11 @@ const update = async (req , res , err) => {
 }
 
 const create = async (req , res , next )=> {
-    const { title , description } = req.body;
+    const { title , description , _user } = req.body;
     const poll = new Poll({ 
         title , 
         description ,
-        _user: req.currentUser._id,
+        _user,
     });
 
     try {

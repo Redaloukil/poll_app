@@ -2,7 +2,6 @@
  * Module dependencies
  */
 const mongoose = require('mongoose');
-const User = require('../models/user');
 const Schema = mongoose.Schema;
 
 
@@ -18,7 +17,7 @@ const ChoiceSchema = new Schema({
         type : String , 
         required : true , 
     },
-    poll:{ 
+    _poll:{ 
         type : Schema.Types.ObjectId , 
         ref : 'User' 
     },
@@ -30,7 +29,17 @@ const ChoiceSchema = new Schema({
 const PollSchema = new Schema({
   title: {type: String, required:true },
   description: {type: String, required:true },
-  user : {type : Schema.Types.ObjectId ,ref:'User'},
+  _user : {type : Schema.Types.ObjectId , ref:'User'},
+});
+
+PollSchema.set('toJSON', {
+    virtuals: true,
+    transform(doc, obj) {
+      obj.id = obj._id;
+      delete obj._id;
+      delete obj.__v;
+      return obj;
+    },
 });
 
 /**

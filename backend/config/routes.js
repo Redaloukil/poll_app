@@ -60,6 +60,7 @@ module.exports = function(app) {
     * Poll routers
   */
   app.get('/polls/' ,  pollController.search);
+  app.post('/polls/' , pollController.create);
   app.get('/polls/:id', pollController.detail);
   // app.patch('/polls/:id' ,authenticate ,pollController.update);
   // app.post('/polls/' , authenticate , pollController.create);

@@ -3,48 +3,43 @@ import {
     POLL_PAGE_LOADED,
     POLL_PAGE_UNLOADED,
 } from './../../constants/actionTypes';
-import PollAction from './PollActions';
-import PollInfos from './PollInfos';
-import PollChoices from './PollChoices';
 import { connect } from 'react-redux';
 import agent from '../../agent';
 
 
 const mapStateToProps = state => ({
-    auth : state.auth,
-    poll : state.poll,
+    ...state
 });
   
 const mapDispatchToProps = dispatch => ({
     onLoad:( payload) =>
       dispatch({ type: POLL_PAGE_LOADED , payload }),
     onUnload: () =>
-      dispatch({  type: POLL_PAGE_UNLOADED })
+      dispatch({ type: POLL_PAGE_UNLOADED })
 });
+
 class Poll extends React.Component {
     componentWillMount(){
-        if(this.props.match.slug){
-            const slug = this.props.match.slug;
-            const promise = new Promise();
-            this.props.onLoad(Promise.all[agent.Polls.get(slug) ,agent.Choices.forPoll(slug)] );
+        if(this.props.match.params.id){
+            const id = this.props.match.params.id;
+            this.props.onLoad(agent.Polls.get(id));
         }
         this.props.onUnload();
     }
     
     render(){
-        if (!this.props.poll) {
+        if (!this.props.poll.body) {
             return (
                 <div>Does Not Exist</div>
             )
         }
-        if(!this.props.poll){
+        if(!this.props.poll.body){
             
         }
         return(
                 <div>
-                    <PollAction/>
-                    <PollInfos/>
-                    <PollChoices/>
+                    <h1>{this.props.poll.body.title}</h1>
+                    <p>{this.props.poll.body.description}</p>
                 </div>
         )
        
@@ -52,4 +47,4 @@ class Poll extends React.Component {
     }
 }
 
-export default connect(()=>{}, mapDispatchToProps )(Poll);
+export default connect(mapStateToProps, mapDispatchToProps )(Poll);

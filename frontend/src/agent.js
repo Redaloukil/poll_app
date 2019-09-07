@@ -38,18 +38,14 @@ const Home = {
 }
 
 const Auth = {
-  //request to get current user 
   current: () =>
     requests.get('user/'),
-  //login request
   login: (username, password) =>
     requests.post('users/login/', {  username, password } ),
-  //signup request
   signup: (username, password) =>
     requests.post('users/signup/', { username, password } ),
-  //update request
   save: user =>
-    requests.put('users/update/', { user })
+    requests.put('users/update/', { user }),
 };
 
 
