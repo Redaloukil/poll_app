@@ -49,7 +49,7 @@ class App extends React.Component {
     if (token) {
       agent.setToken(token);
     }
-    this.props.onLoad(Promise.all(token ? agent.Auth.current() : null , agent.Home.ping()), token );
+    this.props.onLoad(Promise.all([token ? agent.Auth.current() : null , agent.Home.ping()]), token );
   }
 
   render() {

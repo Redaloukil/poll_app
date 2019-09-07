@@ -13,7 +13,9 @@ const login = async (req , res , next) => {
             return next(err);
         }
         const token = user.generateToken();
-        res.json({token}).status(200);
+
+
+        res.json({user : user , token : token }).status(200);
     }catch (err) {
         next(err);
     }
@@ -50,15 +52,16 @@ const current = async (req , res , next) => {
     console.log("current called");
     const { username } = req.currentUser;
     
+    
     try {
-        const current = await User.findOne({username});    
-        if(!current){
+        const currentUser = await User.findOne({ username });    
+        if(!currentUser){
             const err = new Error('You are not authenticated');
             err.status = 401;
             return next(err);
         }
-        const token = current.generateToken();
-        res.status(200).json({ token })
+
+        res.json(currentUser);
 
     } catch(err) {
           err.status = 400;

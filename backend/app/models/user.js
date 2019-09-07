@@ -32,7 +32,7 @@ UserSchema.set('toJSON', {
     obj.id = obj._id;
     delete obj._id;
     delete obj.__v;
-    // delete obj.password;
+    delete obj.password;
     return obj;
   },
 });

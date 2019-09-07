@@ -1,16 +1,15 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/user')
 const Constants = require('../../utils/constants');
-
-
 const { sessionSecret } = Constants.security;
 
 const authenticate = async (req, res, next) => {
-  console.log("authenticate called");
+  
   const { authorization } = req.headers;
   
   jwt.verify(authorization, sessionSecret, async (err, decoded) => {
     if (err) {
+      
       return res.sendStatus(401);
     }
 

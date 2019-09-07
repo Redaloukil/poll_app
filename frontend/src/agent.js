@@ -14,7 +14,8 @@ let token = null;
 //Call back to set the authorization token 
 const tokenPlugin = req => {
   if (token) {
-    req.set('authorization', `Token ${token}`);
+    // req.set('authorization', `Token ${token}`);
+    req.set('authorization', `${token}`);
   }
 }
 
@@ -71,8 +72,8 @@ const omitSlug = article => Object.assign({}, article, { slug: undefined })
 const Polls = {
   all : () => 
     requests.get('polls/'),
-  get : () => 
-    requests.get('polls/'),
+  get : id => 
+    requests.get(`polls/${id}`),
   create : ({poll}) => 
     requests.post('polls/' , {poll}) ,
 }
