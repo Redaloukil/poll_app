@@ -13,9 +13,11 @@ const login = async (req , res , next) => {
             return next(err);
         }
         const token = user.generateToken();
-
-
-        res.json({user : user , token : token }).status(200);
+        res.json({
+            user , 
+            token 
+        }).status(200);
+    
     }catch (err) {
         next(err);
     }
@@ -49,9 +51,7 @@ const signup = async (req , res ,next ) => {
 
 
 const current = async (req , res , next) => {
-    console.log("current called");
     const { username } = req.currentUser;
-    
     
     try {
         const currentUser = await User.findOne({ username });    

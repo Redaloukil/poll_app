@@ -1,15 +1,28 @@
 const { Poll , Choice } = require('../models/poll');
 
+
+
+const getChoice = async(req , res , next) => {
+    const { id } = req.params;
+    try {
+        const choices = await Choice.findOne({_user : id});
+        res.json(choices).status(200);
+    }catch {
+        next(err)
+    }
+}
+
 const createChoice = async (req , res , next) => {
-    const { title , description } = req.body;
-    const newChoice = new choice({ 
+    const { title , _user , _poll } = req.body;
+    const newChoice = new Choice({ 
         title , 
-        description
+        _user ,
+        _poll ,
     });
     try {
-        const choice = await newChoice.save();
+        res.status(201).json(await poll.save());
     }catch {
-
+        next(err)
     }
 }
 const deleteChoice = async (req , res , next) => {
@@ -33,6 +46,8 @@ const selectChoice = async ( req , res , next ) => {
 }
 
 module.exports = {
-    createC,
-    deleteC,
+    getChoice ,
+    createChoice ,
+    deleteChoice ,
+    selectChoice ,
 }

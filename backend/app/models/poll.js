@@ -13,23 +13,42 @@ const ChoiceSchema = new Schema({
         type : String , 
         required :true 
     },
-    description : { 
-        type : String , 
-        required : true , 
-    },
     _poll:{ 
         type : Schema.Types.ObjectId , 
-        ref : 'User' 
+        ref : 'Poll' 
     },
-})
+    _user : {
+        type : Schema.Types.ObjectId , 
+        ref : 'User'
+    }
+});
 
 /**
  * Poll schema
  */
 const PollSchema = new Schema({
-  title: {type: String, required:true },
-  description: {type: String, required:true },
-  _user : {type : Schema.Types.ObjectId , ref:'User'},
+  title: { 
+      type: String, 
+      required:true 
+    },
+  description: {
+      type: String, 
+      required:true 
+   },
+  _user : { 
+      type : Schema.Types.ObjectId , 
+      ref:'User'
+   },
+});
+
+ChoiceSchema.set('toJSON', {
+    virtuals: true,
+    transform(doc, obj) {
+      obj.id = obj._id;
+      delete obj._id;
+      delete obj.__v;
+      return obj;
+    },
 });
 
 PollSchema.set('toJSON', {

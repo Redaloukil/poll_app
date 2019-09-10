@@ -4,7 +4,12 @@ import {
     POLL_PAGE_UNLOADED,
 } from './../../constants/actionTypes';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import agent from '../../agent';
+import PollActions from './PollActions';
+import PollChoices from './PollChoices';
+import PollInfos from './PollInfos';
+
 
 
 const mapStateToProps = state => ({
@@ -22,7 +27,7 @@ class Poll extends React.Component {
     componentWillMount(){
         if(this.props.match.params.id){
             const id = this.props.match.params.id;
-            this.props.onLoad(agent.Polls.get(id));
+            this.props.onLoad([agent.Polls.get(id) , agent.Choices.get(id)]);
         }
         this.props.onUnload();
     }
@@ -30,16 +35,14 @@ class Poll extends React.Component {
     render(){
         if (!this.props.poll.body) {
             return (
-                <div>Does Not Exist</div>
+                <Redirect to='/404' />
             )
-        }
-        if(!this.props.poll.body){
-            
         }
         return(
                 <div>
-                    <h1>{this.props.poll.body.title}</h1>
-                    <p>{this.props.poll.body.description}</p>
+                    <PollActions poll={this.props.poll.body}/>
+                    <PollInfos poll={this.props.poll.body}/>
+                    <PollChoices poll={this.props.poll.body} choices={}/>
                 </div>
         )
        

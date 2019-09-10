@@ -4,7 +4,8 @@
   "private": true,
   "devDependencies": {
     "cross-env": "^5.1.4",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "redux-mock-store": "^1.5.3"
   },
   "dependencies": {
     "@tanem/react-nprogress": "^2.0.5",

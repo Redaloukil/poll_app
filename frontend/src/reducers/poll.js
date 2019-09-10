@@ -9,7 +9,8 @@ export default (state = {}, action) => {
     case POLL_PAGE_LOADED:
       return {
         ...state,
-        body: action.error ? null : action.payload,
+        body: action.error ? null : action.payload[0],
+        choices : action.error ? null : action.payload[1],
         error : action.error ? null : action.error,
       };
     case POLL_PAGE_UNLOADED:
