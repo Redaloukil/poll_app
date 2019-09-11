@@ -8,6 +8,7 @@ const authController = require('../app/controllers/auth');
 const homeController = require('../app/controllers/home');
 const userController = require('../app/controllers/user');
 const pollController = require('../app/controllers/poll');
+const choiceController = require('../app/controllers/choices');
 const postController = require('../app/controllers/post');
 
 const { authenticate } = require('../app/middleware/authentication');
@@ -64,7 +65,7 @@ module.exports = function(app) {
   app.get('/polls/:id', pollController.detail);
   // app.patch('/polls/:id' ,authenticate ,pollController.update);
   // app.post('/polls/' , authenticate , pollController.create);
-  // app.get('/polls/:id/choices/' , authenticate , pollController.searchChoices );
+  app.get('/polls/:id/choices/' , authenticate , choiceController.getPollChoices );
   // app.post('/polls/:id/choices/' , authenticate , pollController.createChoice);
   
   /**

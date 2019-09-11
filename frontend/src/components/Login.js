@@ -44,7 +44,6 @@ class Login extends React.Component {
   }
 
   componentWillMount(){
-    
     this.props.onLoad();
    
   }

@@ -2,10 +2,10 @@ const { Poll , Choice } = require('../models/poll');
 
 
 
-const getChoice = async(req , res , next) => {
+const getPollChoices = async(req , res , next) => {
     const { id } = req.params;
     try {
-        const choices = await Choice.findOne({_user : id});
+        const choices = await Choice.findOne({_post : id});
         res.json(choices).status(200);
     }catch {
         next(err)
@@ -46,7 +46,7 @@ const selectChoice = async ( req , res , next ) => {
 }
 
 module.exports = {
-    getChoice ,
+    getPollChoices,
     createChoice ,
     deleteChoice ,
     selectChoice ,

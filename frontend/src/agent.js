@@ -86,25 +86,25 @@ const Posts = {
 }
 
 const Choices = {
-  forPoll : (slug) => {
-    requests.get(`polls/${slug}/`);
+  forPoll : (id) => {
+    requests.get(`polls/${id}/choices/`);
   },
-  create : (slug ,choice) => {
-    requests.post(`polls/${slug}/comments`, {choice});
+  create : (id,{choice}) => {
+    requests.post(`polls/${id}/comments`, {choice});
   },
-  del : (slug , id) => {
-    requests.del(`polls/${slug}/comments/${id}`);
+  del : (id, choiceId) => {
+    requests.del(`polls/${id}/comments/${choiceId}`);
   }
 }
 
-const Comments = {
-  create: (slug, comment) =>
-    requests.post(`articles/${slug}/comments`, { comment }),
-  delete: (slug, commentId) =>
-    requests.del(`articles/${slug}/comments/${commentId}`),
-  forArticle: slug =>
-    requests.get(`articles/${slug}/comments`)
-};
+// const Comments = {
+//   create: (slug, comment) =>
+//     requests.post(`articles/${slug}/comments`, { comment }),
+//   delete: (slug, commentId) =>
+//     requests.del(`articles/${slug}/comments/${commentId}`),
+//   forArticle: slug =>
+//     requests.get(`articles/${slug}/comments`)
+// };
 
 
 

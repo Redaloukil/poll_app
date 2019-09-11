@@ -27,27 +27,21 @@ class Poll extends React.Component {
     componentWillMount(){
         if(this.props.match.params.id){
             const id = this.props.match.params.id;
-            this.props.onLoad([agent.Polls.get(id) , agent.Choices.get(id)]);
+            this.props.onLoad(Promise.all([agent.Polls.get(id) , agent.Choices.forPoll(id)]));
         }
         this.props.onUnload();
     }
     
     render(){
-        if (!this.props.poll.body) {
-            return (
-                <Redirect to='/404' />
-            )
-        }
+        if(!this.props.poll.body) return <div>Loading</div>
         return(
                 <div>
                     <PollActions poll={this.props.poll.body}/>
                     <PollInfos poll={this.props.poll.body}/>
-                    <PollChoices poll={this.props.poll.body} choices={}/>
+                    <PollChoices choices={this.props.poll.choices}/>
                 </div>
         )
-       
-        
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps )(Poll);
+export default connect(mapStateToProps, mapDispatchToProps)(Poll);
