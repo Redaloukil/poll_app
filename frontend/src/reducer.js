@@ -6,6 +6,7 @@ import settings from './reducers/settings';
 import pollsList from './reducers/pollsList';
 import postsList from './reducers/postsList';
 import poll from './reducers/poll';
+import pollEdit from './reducers/pollEdit';
 import { routerReducer } from 'react-router-redux';
 
 export default combineReducers({
@@ -18,6 +19,7 @@ export default combineReducers({
   settings,
   pollsList,
   postsList,
+  pollEdit,
   poll,
   router: routerReducer
 });

@@ -8,10 +8,9 @@ import {
   UPDATE_FIELD_EDITOR,
   POLL_SUBMITTED,
 } from '../constants/actionTypes';
-import ChoiceEdit from './ChoiceEdit';
 
 const mapStateToProps = state => ({
-  ...state.editor
+  ...state.pollEdit
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -19,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: EDITOR_PAGE_LOADED, payload }),
   onSubmit: payload =>
     dispatch({ type: POLL_SUBMITTED, payload }),
-  onUnload: payload =>
+  onUnload: () =>
     dispatch({ type: EDITOR_PAGE_UNLOADED }),
   onUpdateField: (key, value) =>
     dispatch({ type: UPDATE_FIELD_EDITOR, key, value })
@@ -28,49 +27,43 @@ const mapDispatchToProps = dispatch => ({
 class PollEditor extends React.Component {
   constructor() {
     super();
+    this.state = {
+      error: {},
+    }
+
 
     const updateFieldEvent =
       key => ev => this.props.onUpdateField(key, ev.target.value);
     this.changeTitle = updateFieldEvent('title');
     this.changeDescription = updateFieldEvent('description');
     
-    this.watchForEnter = ev => {
-      if (ev.keyCode === 13) {
-        ev.preventDefault();
-        this.props.onAddTag();
-      }
-    };
-
-    
     this.submitForm = ev => {
       ev.preventDefault();
-      const poll = {
-        title: this.props.title,
-        description: this.props.description,
-       };
 
-      const slug = { slug: this.props.pollSlug };
-      const promise = this.props.pollSlug ?
-        agent.Articles.update(Object.assign(poll, slug)) :
-        agent.Articles.create(poll);
-
-      this.props.onSubmit(promise);
+      const title = this.props.title;
+      const description = this.props.description;
+      
+      const id = this.props.match.params.id 
+      console.log(title)
+      console.log(description)
+      
+      this.props.onSubmit(id ? agent.Polls.update({title , description}) : agent.Polls.create({title , description}));
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.match.params.slug !== nextProps.match.params.slug) {
-      if (nextProps.match.params.slug) {
+    if (this.props.match.params.id !== nextProps.match.params.id) {
+      if (nextProps.match.params.id) {
         this.props.onUnload();
-        return this.props.onLoad(agent.Polls.get(this.props.match.params.slug));
+        return this.props.onLoad(agent.Polls.get(this.props.match.params.id));
       }
       this.props.onLoad(null);
     }
   }
 
   componentWillMount() {
-    if (this.props.match.params.slug) {
-      return this.props.onLoad(agent.Polls.get(this.props.match.params.slug));
+    if (this.props.match.params.id) {
+      return this.props.onLoad(agent.Polls.get(this.props.match.params.id));
     }
     this.props.onLoad(null);
   }
@@ -95,7 +88,7 @@ class PollEditor extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Poll title"
+                      placeholder="Title"
                       value={this.props.title}
                       onChange={this.changeTitle} />
                   </fieldset>
@@ -104,7 +97,7 @@ class PollEditor extends React.Component {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Poll description"
+                      placeholder="Description"
                       value={this.props.description}
                       onChange={this.changeDescription} />
                   </fieldset>
@@ -115,7 +108,7 @@ class PollEditor extends React.Component {
                     onClick={this.submitForm}>
                     Publish Poll
                   </button>
-                  <ChoiceEdit/>
+                  
 
                 </fieldset>
               </form>

@@ -15,12 +15,12 @@ export default (state = {}, action) => {
       };
     case POLL_EDITOR_PAGE_UNLOADED:
       return {
-        
+        ...state
       };
     case UPDATE_FIELD_EDITOR:
       return {
-        ...state,
-        [action.payload.field] : action.payload.content       
+        ...state ,
+        [action.key] : action.value       
       }
     default:
       return state;

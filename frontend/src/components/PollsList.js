@@ -17,7 +17,6 @@ const PollsList = props => {
     }
     return (
         <div>
-
             {props.polls.map((poll) =>{
                 return (
                     <div className="home-poll">
@@ -28,9 +27,6 @@ const PollsList = props => {
                     </div>
                 )
             })}
-
-
-            
         </div>
   );
 };

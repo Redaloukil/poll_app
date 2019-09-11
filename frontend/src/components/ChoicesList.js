@@ -1,5 +1,13 @@
 import React from 'react';
 
-const ChoiceList = (props) => {
-
+class ChoiceEdit extends React.Component {
+    render (){
+        return (
+            <div>
+                
+            </div>
+        )
+    }
 }
+
+export default ChoiceEdit;

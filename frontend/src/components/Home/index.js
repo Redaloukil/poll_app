@@ -8,14 +8,12 @@ import {
   
 } from '../../constants/actionTypes';
 import PollsList from './../PollsList';
+import PropTypes from 'prop-types';
 
 
 
 const mapStateToProps = state => ({
   ...state.home,
-  appName: state.common.appName,
-  token: state.common.token,
-  
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -45,5 +43,11 @@ class Home extends React.Component {
     );
   }
 }
+
+// Home.prototype= {
+//   home : PropTypes.object,
+// }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

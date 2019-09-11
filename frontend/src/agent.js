@@ -70,8 +70,10 @@ const Polls = {
     requests.get('polls/'),
   get : id => 
     requests.get(`polls/${id}`),
-  create : ({poll}) => 
-    requests.post('polls/' , {poll}) ,
+  create : ( {title , description} ) => 
+    requests.post('polls/' , {title , description }) ,
+  update : ( id , {title , description} ) => 
+    requests.put(`polls/${id}` , {title , description})
 }
 
 const Posts = {

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Switch , Redirect} from 'react-router-dom';
 import Home from './Home';
+import Polls from './Polls';
+import Posts from './Posts';
 import Login from './Login';
 import Register from './Register';
 import Settings from '../components/Settings';
@@ -62,6 +64,8 @@ class App extends React.Component {
                 <Route exact path="/" component={Home}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
+                <Route path="/polls" component={Polls}/>
+                <Route path="/posts" component={Posts}/>
                 <Route path="/polls/:id" component={Poll}/>
                 <Route path="/poll-edit" component={PollEditor}/>
                 <Route path="/post-edit" component={PostEditor}/>
@@ -84,12 +88,11 @@ class App extends React.Component {
 }
 
 App.contextTypes = {
-  //variables
-  appLoaded : PropTypes.bool.isRequired ,
-  appName : PropTypes.string.isRequired,
-  router: PropTypes.object.isRequired , 
-  //methods 
-  onRedirect : PropTypes.func.isRequired ,
+  // appLoaded : PropTypes.bool.isRequired ,
+  // appName : PropTypes.string.isRequired,
+  // router: PropTypes.object.isRequired , 
+  // currentUser : PropTypes.object.isRequired,
+  // onRedirect : PropTypes.func.isRequired ,
 };
 
 
