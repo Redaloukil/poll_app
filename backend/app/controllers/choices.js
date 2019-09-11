@@ -13,20 +13,35 @@ const getPollChoices = async(req , res , next) => {
 }
 
 const createChoice = async (req , res , next) => {
-    const { title , _user , _poll } = req.body;
-    const newChoice = new Choice({ 
-        title , 
-        _user ,
-        _poll ,
-    });
+    // title of the choice 
+    const { title } = req.body;
+    // id of the poll
+    const { id } = req.params;
+    const poll = await Poll.findById(id);
+    if (!poll) {
+        err.status(404)
+        err.body('Cannot find this poll');
+        next(err);
+    }
+    if (poll._user != req.currentUser._id ){
+        err.status(401)
+        next(err);
+    }
     try {
-        res.status(201).json(await poll.save());
+        const _user = req.currentUser._id;
+        const _poll = poll._id
+        const choice = new Choice({
+            title ,
+            _user ,
+            _poll ,
+        })  
+        res.status(201).json(await choice.save());
     }catch {
         next(err)
     }
 }
 const deleteChoice = async (req , res , next) => {
-    const { poll , choice } = req.body;
+    const { _poll , _choice  , title } = req.body;
     try {
         //find poll 
         const poll = await Poll.find({id:poll.id});

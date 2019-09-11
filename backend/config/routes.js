@@ -64,8 +64,11 @@ module.exports = function(app) {
   app.post('/polls/' , pollController.create);
   app.get('/polls/:id', pollController.detail);
   // app.patch('/polls/:id' ,authenticate ,pollController.update);
-  // app.post('/polls/' , authenticate , pollController.create);
-  app.get('/polls/:id/choices/' , authenticate , choiceController.getPollChoices );
+
+  /**
+    * Choices routers
+  */
+  app.post('/polls/:id/choices/create' , authenticate , choiceController.createChoice );
   // app.post('/polls/:id/choices/' , authenticate , pollController.createChoice);
   
   /**
