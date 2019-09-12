@@ -44,9 +44,9 @@ class Home extends React.Component {
   }
 }
 
-// Home.prototype= {
-//   home : PropTypes.object,
-// }
+Home.contextType= {
+  home : PropTypes.object.isRequired, 
+}
 
 
 

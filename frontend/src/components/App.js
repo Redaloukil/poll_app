@@ -4,10 +4,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, Switch , Redirect} from 'react-router-dom';
-import Home from './Home';
-import Polls from './Polls';
-import Posts from './Posts';
-import Login from './Login';
+import Home from '../components/Home';
+import Polls from '../components/Polls';
+import Posts from '../components/Posts';
+import Login from '../components/Login';
 import Register from './Register';
 import Settings from '../components/Settings';
 import PollEditor from '../components/EditPoll';
@@ -64,9 +64,9 @@ class App extends React.Component {
                 <Route exact path="/" component={Home}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
-                <Route path="/polls" component={Polls}/>
+                <Route exact path="/polls" component={Polls}/>
                 <Route path="/posts" component={Posts}/>
-                <Route path="/polls/:id" component={Poll}/>
+                <Route exact path="/polls/:id" component={Poll}/>
                 <Route path="/poll-edit" component={PollEditor}/>
                 <Route path="/post-edit" component={PostEditor}/>
                 <Route path="/settings" component={Settings}/>

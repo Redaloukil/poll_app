@@ -10,11 +10,8 @@ import pollEdit from './reducers/pollEdit';
 import { routerReducer } from 'react-router-redux';
 
 export default combineReducers({
-  // article,
-  // articleList,
   auth,
   common,
-  // editor,
   home,
   settings,
   pollsList,

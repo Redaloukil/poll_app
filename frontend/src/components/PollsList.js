@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
 const PollsList = props => {
@@ -30,6 +31,11 @@ const PollsList = props => {
         </div>
   );
 };
+
+
+PollsList.contextTypes = {
+    polls : PropTypes.object.isRequired,
+}
 
 export default PollsList;
 

@@ -5,10 +5,11 @@ import {
 
 export default (state = {}, action) => {
   switch (action.type) {
-    
-    
     case POLLS_PAGE_UNLOADED :
-      return {};
+      return {
+        ...state,
+        polls : action.payload,
+      };
     case POLLS_PAGE_LOADED :
       return {};
     default:
