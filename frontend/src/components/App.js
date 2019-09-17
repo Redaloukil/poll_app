@@ -14,6 +14,7 @@ import PollEditor from '../components/EditPoll';
 import PostEditor from '../components/EditPost';
 import Poll from '../components/Poll/index';
 import NotFound from './Errors/Notfound';
+import PollChoiceEdit from '../components/Poll/PollChoiceEdit';
 import { store } from '../store';
 import { push } from 'react-router-redux';
 import { 
@@ -66,6 +67,7 @@ class App extends React.Component {
                 <Route path="/register" component={Register}/>
                 <Route exact path="/polls" component={Polls}/>
                 <Route exact path="/polls/:id" component={Poll}/>
+                <Route exact path="/polls/:id/choices/" component={PollChoiceEdit}/>
                 <Route path="/posts" component={Posts}/>
                 <Route exact path="/poll-edit" component={PollEditor}/>
                 <Route exact path="/poll-edit/:id" component={PollEditor}/>

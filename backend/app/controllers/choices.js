@@ -3,10 +3,12 @@ const { Poll , Choice } = require('../models/poll');
 
 
 const getPollChoices = async(req , res , next) => {
+    console.log("get poll choices")
     const { id } = req.params;
     try {
-        const choices = await Choice.findOne({_post : id});
-        res.json(choices).status(200);
+        const choices = await Choice.find({_post : id});
+        console.log(choices)
+        res.json(choices);
     }catch {
         next(err)
     }

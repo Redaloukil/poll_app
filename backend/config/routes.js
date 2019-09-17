@@ -68,7 +68,8 @@ module.exports = function(app) {
   /**
     * Choices routers
   */
-  app.post('/polls/:id/choices/create' , authenticate , choiceController.createChoice );
+  app.get('/polls/:id/choices/' , choiceController.getPollChoices );
+  app.post('/polls/:id/choices/create/' , authenticate , choiceController.createChoice );
   // app.post('/polls/:id/choices/' , authenticate , pollController.createChoice);
   
   /**

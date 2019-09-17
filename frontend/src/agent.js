@@ -88,11 +88,11 @@ const Posts = {
 }
 
 const Choices = {
-  forPoll : (id) => {
+  forPoll : id => {
     requests.get(`polls/${id}/choices/`);
   },
-  create : (id,{choice}) => {
-    requests.post(`polls/${id}/comments`, {choice});
+  create : (id, {choice} ) => {
+    requests.post(`polls/${id}/choices`, {choice});
   },
   del : (id, choiceId) => {
     requests.del(`polls/${id}/comments/${choiceId}`);
