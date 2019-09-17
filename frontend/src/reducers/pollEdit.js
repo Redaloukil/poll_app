@@ -10,8 +10,8 @@ export default (state = {}, action) => {
     case POLL_EDITOR_PAGE_LOADED:
       return {
         ...state,
-        title : '', 
-        description : '',
+        title : action.payload ? action.payload.title : '', 
+        description : action.payload ? action.payload.description : '',
       };
     case POLL_EDITOR_PAGE_UNLOADED:
       return {

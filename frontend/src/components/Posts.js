@@ -4,7 +4,7 @@ import {
     POSTS_PAGE_LOADED ,
     POSTS_PAGE_UNLOADED ,
 } from '../constants/actionTypes';
-
+import NProgress from 'nprogress';
 const mapStateToProps = state => ({ 
     ...state.polls 
 });
@@ -17,6 +17,13 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Posts extends React.Component {
+
+    componentWillMount(){
+        NProgress.start();
+    }
+    componentDidMount(){
+        NProgress.done();
+    }
     render (){
         return (
             <div>

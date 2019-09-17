@@ -9,6 +9,7 @@ import {
   LOGIN,
   LOGIN_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import NProgress from 'nprogress';
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -44,11 +45,13 @@ class Login extends React.Component {
   }
 
   componentWillMount(){
+    NProgress.start();
     this.props.onLoad();
    
   }
 
   componentWillUnmount() {
+    NProgress.done();
     this.props.onUnload();
   }
 

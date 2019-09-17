@@ -9,6 +9,8 @@ import {
   REGISTER,
   REGISTER_PAGE_UNLOADED
 } from '../constants/actionTypes';
+import NProgress from 'nprogress'; 
+
 
 const mapStateToProps = state => ({ ...state.auth });
 
@@ -50,7 +52,7 @@ class Register extends React.Component {
     this.submitForm = (username,password) => ev => {
       ev.preventDefault();
       const errors = this.validate();
-      
+
       this.setState({errors})
       
       if(Object.keys(this.state.errors).length === 0){
@@ -60,7 +62,11 @@ class Register extends React.Component {
     }
   }
 
+  componentWillMount(){
+    NProgress.start();
+  }
   componentWillUnmount() {
+    NProgress.done();
     this.props.onUnload();
   }
 
@@ -69,8 +75,6 @@ class Register extends React.Component {
     const password = this.props.password;
     const cpassword = this.props.cpassword;
     
-
-
     return (
       <div className="auth-page">
         <div className="container page">

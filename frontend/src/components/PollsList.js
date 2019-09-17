@@ -24,6 +24,8 @@ const PollsList = props => {
                         <h1>{poll.title}</h1>
                         <p>{poll.description}</p>
                         <Link to={`/polls/${poll.id}`}>Make a poll</Link>
+                        <br/>
+                        <Link to={`/poll-edit/${poll.id}`}>Edit</Link>
 
                     </div>
                 )

@@ -6,7 +6,8 @@ import {
 } from '../constants/actionTypes';
 import agent from '../agent';
 import PollsList from './PollsList';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import NProgress from 'nprogress'
 
 
 const mapStateToProps = state => ({ 
@@ -24,10 +25,13 @@ const mapDispatchToProps = dispatch => ({
 
 class Polls extends React.Component {
     componentWillMount(){
+        NProgress.start();
         this.props.onLoad(agent.Polls.all());
+        
     }
     
     componentDidMount(){
+        NProgress.done();
         this.props.onUnload();
     }
     

@@ -65,9 +65,10 @@ class App extends React.Component {
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
                 <Route exact path="/polls" component={Polls}/>
-                <Route path="/posts" component={Posts}/>
                 <Route exact path="/polls/:id" component={Poll}/>
-                <Route path="/poll-edit" component={PollEditor}/>
+                <Route path="/posts" component={Posts}/>
+                <Route exact path="/poll-edit" component={PollEditor}/>
+                <Route exact path="/poll-edit/:id" component={PollEditor}/>
                 <Route path="/post-edit" component={PostEditor}/>
                 <Route path="/settings" component={Settings}/>
                 <Route path="/404" component={NotFound}/>

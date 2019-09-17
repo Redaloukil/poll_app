@@ -3,8 +3,8 @@ import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import {
-  EDITOR_PAGE_LOADED,
-  EDITOR_PAGE_UNLOADED,
+  POLL_EDITOR_PAGE_LOADED,
+  POLL_EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR,
   POLL_SUBMITTED,
 } from '../constants/actionTypes';
@@ -15,11 +15,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: payload =>
-    dispatch({ type: EDITOR_PAGE_LOADED, payload }),
+    dispatch({ type: POLL_EDITOR_PAGE_LOADED, payload }),
   onSubmit: payload =>
     dispatch({ type: POLL_SUBMITTED, payload }),
   onUnload: () =>
-    dispatch({ type: EDITOR_PAGE_UNLOADED }),
+    dispatch({ type: POLL_EDITOR_PAGE_UNLOADED }),
   onUpdateField: (key, value) =>
     dispatch({ type: UPDATE_FIELD_EDITOR, key, value })
 });
@@ -54,7 +54,6 @@ class PollEditor extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.match.params.id !== nextProps.match.params.id) {
       if (nextProps.match.params.id) {
-        this.props.onUnload();
         return this.props.onLoad(agent.Polls.get(this.props.match.params.id));
       }
       this.props.onLoad(null);
@@ -63,7 +62,8 @@ class PollEditor extends React.Component {
 
   componentWillMount() {
     if (this.props.match.params.id) {
-      return this.props.onLoad(agent.Polls.get(this.props.match.params.id));
+      const id = this.props.match.params.id;
+      return this.props.onLoad(agent.Polls.get(id));
     }
     this.props.onLoad(null);
   }
