@@ -80,7 +80,7 @@ const LoggedInView = props => {
 
         <li className="nav-item">
           <Link
-            to={`/@${props.currentUser.username}`}
+            to=""
             className="nav-link">
             {props.currentUser.username}
           </Link>

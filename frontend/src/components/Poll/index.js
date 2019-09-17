@@ -10,11 +10,12 @@ import PollActions from './PollActions';
 import PollChoices from './PollChoices';
 import PollInfos from './PollInfos';
 import NProgress from 'nprogress';
+import PollChoiceEdit from './PollChoiceEdit';
 
 
 
 const mapStateToProps = state => ({
-    ...state
+    ...state.poll
 });
   
 const mapDispatchToProps = dispatch => ({
@@ -41,12 +42,13 @@ class Poll extends React.Component {
     }
     
     render(){
-        if(!this.props.poll.body) return <div>Loading</div>
+        if(!this.props.body) return <div>Loading</div>
         return(
                 <div>
-                    <PollActions poll={this.props.poll.body}/>
-                    <PollInfos poll={this.props.poll.body}/>
-                    <PollChoices choices={this.props.poll.choices}/>
+                    <PollActions poll={this.props.body}/>
+                    <PollInfos poll={this.props.body}/>
+                    <PollChoices choices={this.props.choices}/>
+                    <PollChoiceEdit id={this.props.match.params.id}/>
                 </div>
         )
     }

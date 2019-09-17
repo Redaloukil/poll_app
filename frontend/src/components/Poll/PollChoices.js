@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const PollChoices = (props) => {
-    if(!props.choices) return <div>No Choice Yet</div>
+    if(!props.choices) return <div>Loading..</div>
     if(props.choices.length == 0) return (<div>This poll has no choices</div>)
     return (
         <div>
