@@ -25,6 +25,7 @@ const login = async (req , res , next) => {
 
 const signup = async (req , res ,next ) => {
     const { username , password } = req.body;
+    
     console.log(username , password);
     
     let createdUser = new User({ 

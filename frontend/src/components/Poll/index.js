@@ -29,9 +29,8 @@ class Poll extends React.Component {
     componentWillMount(){
         NProgress.start();
         if(this.props.match.params.id){
-            this.props.onLoad(Promise.all([
-                agent.Polls.get(this.props.match.params.id) , 
-                agent.Choices.forPoll(this.props.match.params.id)
+            return this.props.onLoad(Promise.all([
+                agent.Polls.get(this.props.match.params.id), agent.Choices.forPoll(this.props.match.params.id)
             ]
         ));
         }

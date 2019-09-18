@@ -12,14 +12,14 @@ import agent from '../../agent';
 
 const mapStateToProps = (state) => ({
      ...state.choiceEdit,
-     id : state.poll
+     
     
 })
 const mapDispatchToProps = (dispatch) => ({
     onChangeField : (value  , key ) => 
         dispatch({ type : CHOICE_FIELD_EDIT , value, key }),
     onSubmit : payload  => 
-        dispatch({ type : CHOICE_SUBMITTED , payload}),
+        dispatch({ type : CHOICE_SUBMITTED , payload }),
     onEditOpen : () => 
         dispatch({ type : CHOICE_EDIT_OPEN }),
     onEditClose : () => 
@@ -31,13 +31,14 @@ class PollChoiceEdit extends React.Component {
     constructor(props){
         super(props)
 
+        
+        this.onChangeChoiceText = (ev) => { this.props.onChangeField( ev.target.value , 'choiceText')}
         this.submit = (ev) => {
             ev.preventDefault();
-            agent.Choices.create(this.props.id , {text : this.props.choiceText});
-            this.props.onSubmit(ev.target.value);
+            console.log(this.props.id);
+            console.log(this.props.choiceText)
+            this.props.onSubmit(agent.Choices.create(this.props.id , {title : this.props.choiceText}));
         }
-        this.onChangeChoiceText = (ev) => { this.props.onChangeField( ev.target.value , 'choiceText')}
-        
     }
     
 
@@ -47,7 +48,7 @@ class PollChoiceEdit extends React.Component {
                 { this.props.edit ? null : <button onClick={this.props.onEditOpen}>+</button>}
                 { !this.props.edit ? null :<fieldset>
                     <input type="text" value={this.props.choiceText} onChange={this.onChangeChoiceText}/>
-                    <button onClick={this.props.onSubmit}>Add</button>
+                    <button onClick={this.submit}>Add</button>
                     <button onClick={this.props.onEditClose}>X</button>
                 </fieldset> }
             </div>

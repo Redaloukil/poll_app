@@ -68,8 +68,8 @@ module.exports = function(app) {
   /**
     * Choices routers
   */
-  app.get('/polls/:id/choices/' , choiceController.getPollChoices );
-  app.post('/polls/:id/choices/create/' , authenticate , choiceController.createChoice );
+  app.get('/polls/choices/:id/' , choiceController.getPollChoices );
+  app.post('/polls/choices/create/:id/' , authenticate , choiceController.createChoice );
   // app.post('/polls/:id/choices/' , authenticate , pollController.createChoice);
   
   /**
@@ -80,6 +80,4 @@ module.exports = function(app) {
   // app.patch('/posts/:id', authenticate ,userController.update);
   // app.delete('/posts/',authenticate , PostsController.delete);
   // app.post('/posts/' , authenticate , userController.create);
-  
-
 };

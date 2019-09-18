@@ -3,11 +3,10 @@ const { Poll , Choice } = require('../models/poll');
 
 
 const getPollChoices = async(req , res , next) => {
-    console.log("get poll choices")
     const { id } = req.params;
+    console.log(id);
     try {
-        const choices = await Choice.find({_post : id});
-        console.log(choices)
+        const choices = await Choice.find({ _post : id });
         res.json(choices);
     }catch {
         next(err)
@@ -15,30 +14,37 @@ const getPollChoices = async(req , res , next) => {
 }
 
 const createChoice = async (req , res , next) => {
+    
     // title of the choice 
     const { title } = req.body;
     // id of the poll
     const { id } = req.params;
+    
     const poll = await Poll.findById(id);
+    
     if (!poll) {
-        err.status(404)
+        err.status(401)
         err.body('Cannot find this poll');
         next(err);
     }
-    if (poll._user != req.currentUser._id ){
-        err.status(401)
-        next(err);
+    if (poll._user =! req.currentUser._id ){
+        const err = new Error('You are not Allowed');
+        err.status = 401;
+        return next(err);
+        
     }
     try {
-        const _user = req.currentUser._id;
-        const _poll = poll._id
+        console.log("create choice");
         const choice = new Choice({
             title ,
-            _user ,
-            _poll ,
-        })  
-        res.status(201).json(await choice.save());
-    }catch {
+            _user : req.currentUser._id ,
+            _poll : id ,
+        }) 
+        console.log(choice._poll) 
+        const choiceSaved = await choice.save()
+        console.log("########################## created")
+        res.status(201).json(choiceSaved);
+    }catch (err) {
         next(err)
     }
 }
