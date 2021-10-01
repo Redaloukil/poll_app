@@ -1,76 +1,24 @@
 'use strict';
-/*
- * nodejs-express-mongoose
- * Copyright(c) 2015 Madhusudhan Srinivasa <madhums8@gmail.com>
- * MIT Licensed
- */
 
-/**
- * Module dependencies
- */
 
 require('dotenv').config();
 
-const fs = require('fs');
-const join = require('path').join;
 const express = require('express');
-const mongoose = require('mongoose');
-const passport = require('passport');
-const config = require('./config');
-const bodyParser = require('body-parser');
 
-const models = join(__dirname, 'app/models');
 const port = process.env.PORT || 3000;
 
 const app = express();
-const connection = connect();
 
-app.use(express.json())
-// https://github.com/expressjs/body-parser
-app.use(bodyParser.json());
-// bodyParser should be above methodOverride
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.get("",(req, res) => {
+  
+  res.send("hello world");
+  next();
 
-/**
- * Expose
- */
+});
 
-module.exports = {
-  app,
-  connection
-};
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Bootstrap models
-fs.readdirSync(models)
-  .filter(file => ~file.indexOf('.js'))
-  .forEach(file => require(join(models, file)));
+if (app.get('env') === 'test') return;
 
-// Bootstrap routes
-require('./config/passport')(passport);
-require('./config/express')(app, passport);
-require('./config/routes')(app, passport);
-
-
-
-
-connection
-  .on('error', console.log)
-  .on('disconnected', connect)
-  .once('open', listen);
-
-function listen() {
-  if (app.get('env') === 'test') return;
-  app.listen(port);
-  console.log('Express app started on port ' + port);
-}
-
-function connect() {
-  var options = { keepAlive: 1, useNewUrlParser: true };
-  mongoose.connect(config.db, options);
-  mongoose.set('useNewUrlParser', true);
-  mongoose.set('useFindAndModify', false);
-  mongoose.set('useCreateIndex', true);
-  return mongoose.connection;
-}
+app.listen(port);
