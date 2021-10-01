@@ -8,21 +8,10 @@ services:
       - 27017:27017
     volumes:
       - ./backend/data:/data/db
-  react:
-    build:
-        context: ./frontend/
-        dockerfile: ./docker/Dockerfile
-    volumes:
-      - ./frontend:/app
-    ports:
-      - 4000:4000
-    depends_on:
-      - mongo
-      - node
   node:
     build:
-        context: ./backend/
-        dockerfile: ./docker/Dockerfile
+      context: ./backend/
+      dockerfile: ./docker/Dockerfile
     volumes:
       - ./backend:/app
     command: /usr/local/wait-for-it.sh mongo:27017 -- npm start
@@ -32,4 +21,3 @@ services:
       - 3000:3000
     depends_on:
       - mongo
-  
