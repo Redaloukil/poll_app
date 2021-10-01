@@ -1,0 +1,31 @@
+Poll 
+    creator User 
+    title
+    description
+    created_at
+    deleted_at
+    
+Choice
+    poll Poll
+    title
+    description
+    created_at
+    deleted_at
+ 
+User 
+    username 
+    password 
+    bio
+    avatar
+    created_at
+    deleted_at
+
+Vote 
+    user User
+    choice Choice
+    created_at
+    deleted_at
+    
+
+
+

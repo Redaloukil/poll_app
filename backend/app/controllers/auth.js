@@ -50,7 +50,6 @@ const signup = async (req , res ,next ) => {
     }
 }
 
-
 const current = async (req , res , next) => {
     const { username } = req.currentUser;
     

@@ -1,0 +1,11 @@
+Login :
+- User can login with username and password 
+
+Singup : 
+- User can signup by username and setting a password 
+
+
+Dashboard : 
+- User can see the polls and create a new one.
+- User can see his own poll and people voting on it.
+- User can vote on published polls.

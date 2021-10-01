@@ -1,0 +1,13 @@
+- I'm poll_app user (A)
+
+    I'm someone who would like to vote in a poll.
+    I should create an account. 
+    I should login. 
+    I'm redirected to home page where I see all the opened polls. 
+    I enter to a poll, and vote by selecting one of the choice 
+
+    or : 
+
+    I go to poll creation page. 
+    I create a poll.
+
