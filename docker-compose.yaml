@@ -1,35 +1,28 @@
-version: "3.2"
+version: "3.7"
 
 services:
-  mongo:
-    image: mongo
-    restart: always
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
-      - 27017:27017
+      - "5432:5432"
     volumes:
-      - ./backend/data:/data/db
-  react:
+      - poll_app:/var/lib/postgresql/data
+  backend:
     build:
-        context: ./frontend/
-        dockerfile: ./docker/Dockerfile
-    volumes:
-      - ./frontend:/app
-    ports:
-      - 4000:4000
-    depends_on:
-      - mongo
-      - node
-  node:
-    build:
-        context: ./backend/
-        dockerfile: ./docker/Dockerfile
-    volumes:
-      - ./backend:/app
-    command: /usr/local/wait-for-it.sh mongo:27017 -- npm start
-    env_file:
-      - ./backend/.env
+      context: ./backend/
+      dockerfile: ./docker/Dockerfile
+    environment:
+      DB_SCHEMA: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: postgres
     ports:
       - 3000:3000
-    depends_on:
-      - mongo
-  
+    volumes:
+      - ./backend:/app
+    command: /usr/local/wait-for-it.sh postgres:5432 -- npm start
+volumes:
+  poll_app:
