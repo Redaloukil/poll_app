@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:14-alpine
 
 # add bash
 RUN apk update
@@ -12,6 +12,7 @@ COPY . /app
 RUN npm install
 
 COPY ./docker/wait-for-it.sh /usr/local
+
 RUN chmod +x /usr/local/wait-for-it.sh
 
 EXPOSE 3000

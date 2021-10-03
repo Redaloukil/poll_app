@@ -6,11 +6,8 @@ Poll
     deleted_at
     
 Choice
-    poll Poll
-    title
-    description
-    created_at
-    deleted_at
+    
+    
  
 User 
     username 
