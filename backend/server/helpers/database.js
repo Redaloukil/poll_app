@@ -14,5 +14,6 @@ module.exports = {
                                     dialectOptions: {
                                         ssl: process.env.DB_SSL == "true"
                                     }
-                                })
-}
+                                }),
+};
+
