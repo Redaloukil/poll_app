@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
+require("dotenv").config();
 
-require('dotenv').config();
-
-const express = require('express');
-const database = require('./server/helpers/database');
+const { Users, Votes, Choices } = require("./server/models");
+const express = require("express");
+const database = require("./server/helpers/database");
 
 const port = process.env.PORT || 3000;
 
@@ -15,9 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 try {
   database.sequelize.authenticate();
   database.sequelize.sync();
-  console.info('Connection has been established successfully.');
+  console.info("Connection has been established successfully.");
 } catch (error) {
-  console.error('Unable to connect to the database:', error);
+  console.error("Unable to connect to the database:", error);
 }
 
 app.listen(port);

@@ -1,12 +1,11 @@
-const { Polls } = require('./server/models/polls');
-const { Users } = require('./server/models/users');
-const { Choices } = require('./server/models/choices');
-const { Votes } = require('./server/models/votes');
-
+const { Polls } = require("./polls");
+const { Users } = require("./users");
+const { Choices } = require("./choices");
+const { Votes } = require("./votes");
 
 module.exports = {
-    Polls,
-    Users,
-    Choices,
-    Votes,
-}
+  Polls,
+  Users,
+  Choices,
+  Votes,
+};
