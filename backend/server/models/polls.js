@@ -1,8 +1,8 @@
-const { Sequelize } = require("sequelize");
-const { sequelize } = require("../helpers/database");
-const { Users } = require("../models/users");
+const { Sequelize } = require('sequelize');
+const { sequelize } = require('../helpers/database');
+const { Users } = require('../models/users');
 
-const Polls = sequelize.define("Polls", {
+const Polls = sequelize.define('Polls', {
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -13,7 +13,7 @@ const Polls = sequelize.define("Polls", {
   },
 });
 
-Polls.belongsTo(Users, { foreignKey: "user_id" });
+Polls.belongsTo(Users, { foreignKey: 'user_id' });
 
 module.exports = {
   Polls,

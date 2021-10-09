@@ -1,15 +1,20 @@
 {
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "env": {
-    "browser": false,
+    "browser": true,
     "es6": true,
     "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion":12,
+    "sourceType": "module"
   },
   "parser": "babel-eslint",
   "rules": {
     "prettier/prettier": ["error", {
       "doubleQuote":true,
-    }],
-    "no-console": "off"
+    } ],
+    "no-console": "off",
+    "no-trailing-spaces":"off",
   }
 }
