@@ -13,9 +13,12 @@ module.exports = {
     const user = await Users.findOne({ where: { username } });
     return user;
   },
-  createUser: async ({ username, password }) => {
-    const user = await Users.findOrCreate({ username, password });
-    return user;
+  createUser: async user => {
+    const createdUser = await Users.create(user);
+    if (createdUser) {
+      return createdUser;
+    }
+    return null;
   },
   deleteUserById: async id => {
     await Users.destroy({ where: { id } });

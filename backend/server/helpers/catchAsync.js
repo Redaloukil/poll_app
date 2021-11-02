@@ -1,9 +1,9 @@
 module.exports = {
-  catchAsyncError: async (tryFunction, catchFunction) => {
+  catchAsyncError: (req, res) => async (tryFunction, catchFunction) => {
     try {
-      await tryFunction();
+      return await tryFunction(req, res);
     } catch {
-      catchFunction();
+      return catchFunction(req, res);
     }
   },
 };

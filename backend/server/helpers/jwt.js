@@ -6,7 +6,6 @@ module.exports = {
       const token = jwt.sign(JSON.stringify(user), 'hello world', {
         algorithm: 'HS256',
       });
-
       if (token) {
         return token;
       }
@@ -17,8 +16,6 @@ module.exports = {
   verify: token => {
     try {
       const user = jwt.verify(token, 'hello world');
-      console.log(user);
-
       if (user) {
         return user;
       }
