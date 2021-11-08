@@ -11,6 +11,14 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
+try {
+  database.sequelize.authenticate();
+  database.sequelize.sync();
+  console.info('Connection has been established successfully');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
+
 app.use(cors());
 // app.use(formidableMiddleware());
 app.use(express.json());
@@ -22,13 +30,5 @@ app.get('/', function(req, res) {
 
 app.use('/api/v1', router);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-try {
-  database.sequelize.authenticate();
-  database.sequelize.sync();
-  console.info('Connection has been established successfully');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
 
 app.listen(port);
