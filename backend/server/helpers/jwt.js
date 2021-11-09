@@ -15,6 +15,7 @@ module.exports = {
   },
   verify: token => {
     try {
+      console.log(token);
       const user = jwt.verify(token, 'hello world');
       if (user) {
         return user;

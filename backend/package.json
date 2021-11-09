@@ -42,8 +42,6 @@
     "pm2": "~3.5.0",
     "pug": "~2.0.3",
     "sequelize": "^6.6.5",
-    "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.1.6",
     "view-helpers": "~0.2.0",
     "winston": "~3.2.1"
   },
