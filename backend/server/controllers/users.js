@@ -34,12 +34,12 @@ module.exports = {
         }
         return res.status(400).json({
           message: 'could not create with posted credentials',
-          credetials: user,
+          credetials: user
         });
       },
       (req, res) => {
         return res.status(400).json({
-          message: 'could not create with posted credentials',
+          message: 'could not create with posted credentials'
         });
       }
     ),
@@ -59,5 +59,5 @@ module.exports = {
       (req, res) => {
         return res.status(400);
       }
-    ),
+    )
 };

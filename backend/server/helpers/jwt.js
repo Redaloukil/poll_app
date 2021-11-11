@@ -4,7 +4,7 @@ module.exports = {
   sign: user => {
     try {
       const token = jwt.sign(JSON.stringify(user), 'hello world', {
-        algorithm: 'HS256',
+        algorithm: 'HS256'
       });
       if (token) {
         return token;
@@ -24,5 +24,5 @@ module.exports = {
     } catch (e) {
       throw e;
     }
-  },
+  }
 };

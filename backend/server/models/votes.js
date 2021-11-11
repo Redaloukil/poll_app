@@ -6,13 +6,13 @@ const { sequelize } = require('../helpers/database');
 const Votes = sequelize.define('Votes', {
   name: {
     type: Sequelize.STRING,
-    allowNull: true,
-  },
+    allowNull: true
+  }
 });
 
 Votes.belongsTo(Users, { foreignKey: 'user_id' });
 Votes.belongsTo(Choices, { foreignKey: 'choice_id' });
 
 module.exports = {
-  Votes,
+  Votes
 };

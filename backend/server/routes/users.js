@@ -10,5 +10,5 @@ userRouter.post('/signup', userController.createUser);
 userRouter.post('/login', userController.login);
 
 module.exports = {
-  userRouter,
+  userRouter
 };

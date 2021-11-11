@@ -27,5 +27,5 @@ module.exports = {
   updateUser: async user => {
     const updatedUser = await Users.findOne({ where: { id: user.id } });
     return updatedUser;
-  },
+  }
 };

@@ -27,5 +27,5 @@ module.exports = {
     updatedUser.description = poll.description || updatedUser.description;
 
     return updatedUser;
-  },
+  }
 };

@@ -5,5 +5,5 @@ module.exports = {
     } catch {
       return catchFunction(req, res);
     }
-  },
+  }
 };

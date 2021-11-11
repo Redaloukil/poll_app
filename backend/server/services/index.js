@@ -7,5 +7,5 @@ module.exports = {
   users,
   polls,
   choices,
-  votes,
+  votes
 };

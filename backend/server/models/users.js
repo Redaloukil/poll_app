@@ -5,12 +5,12 @@ const Users = sequelize.define('Users', {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
+    unique: true
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false,
-  },
+    allowNull: false
+  }
 });
 
 Users.beforeCreate('beforeCreating', async user => {
@@ -20,5 +20,5 @@ Users.beforeCreate('beforeCreating', async user => {
 });
 
 module.exports = {
-  Users,
+  Users
 };

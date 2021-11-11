@@ -8,13 +8,13 @@ module.exports = {
   getChoiceById: async id => {
     const choice = await Choices.findOne({
       where: {
-        id,
-      },
+        id
+      }
     });
     return choice;
   },
   createChoice: async choice => {
     const createdChoice = await Choices.create(choice);
     return createdChoice;
-  },
+  }
 };

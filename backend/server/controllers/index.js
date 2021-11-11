@@ -7,5 +7,5 @@ module.exports = {
   userController,
   pollsController,
   choicesController,
-  votesController,
+  votesController
 };

@@ -11,5 +11,5 @@ module.exports = {
       return res.status(401).send({ message: 'you shoud be authenticated' });
     }
     next();
-  },
+  }
 };
