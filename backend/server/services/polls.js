@@ -2,23 +2,23 @@ const { Polls } = require('../models');
 
 module.exports = {
   getAllPolls: async () => {
-    const users = await Polls.findAll();
-
-    return users;
+    const polls = await Polls.findAll();
+    return polls;
   },
   getPollById: async id => {
-    const user = await Polls.findOne({ where: { id } });
-
-    return user;
+    const poll = await Polls.findOne({ where: { id } });
+    return poll;
   },
   createPoll: async ({ title, description }) => {
-    const user = await Polls.findOrCreate({ title, description });
-
-    return user;
+    const poll = await Polls.findOrCreate({
+      title,
+      description,
+      user_id: user
+    });
+    return poll;
   },
   deletePollById: async id => {
     await Polls.destroy({ where: { id } });
-
     return;
   },
   updatePoll: async poll => {
