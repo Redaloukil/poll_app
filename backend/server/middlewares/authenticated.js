@@ -10,6 +10,7 @@ module.exports = {
     if (!user) {
       return res.status(401).send({ message: 'you shoud be authenticated' });
     }
-    next();
+    req.user = user;
+    next(req);
   }
 };

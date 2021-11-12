@@ -1,11 +1,13 @@
 const express = require('express');
+const authenticated = require('../middlewares/authenticated');
+const pollsController = require('../controllers/polls');
 
-const pollRouter = express.Router();
+const pollsRouter = express.Router();
 
-pollRouter.get('/', authenticated, userController.getAllUser);
-pollRouter.get('/:id', authenticated, userController.getOneUser);
-pollRouter.post('/', userController.createUser);
+pollsRouter.get('/', pollsController.getAllPolls);
+pollsRouter.get('/:id', pollsController.getPollById);
+pollsRouter.post('/', authenticated, pollsController.createPoll);
 
 module.exports = {
-  router
+  pollsRouter
 };

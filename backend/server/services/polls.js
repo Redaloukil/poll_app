@@ -2,18 +2,18 @@ const { Polls } = require('../models');
 
 module.exports = {
   getAllPolls: async () => {
-    const polls = await Polls.findAll();
+    const polls = await Polls.findAll({});
     return polls;
   },
   getPollById: async id => {
     const poll = await Polls.findOne({ where: { id } });
     return poll;
   },
-  createPoll: async ({ title, description }) => {
+  createPoll: async ({ title, description, userId }) => {
     const poll = await Polls.findOrCreate({
       title,
       description,
-      user_id: user
+      user_id: userId
     });
     return poll;
   },
@@ -22,10 +22,9 @@ module.exports = {
     return;
   },
   updatePoll: async poll => {
-    const updatedUser = await Polls.findOne({ where: { id: poll.id } });
-    updatedUser.title = poll.title || updatedUser.title;
-    updatedUser.description = poll.description || updatedUser.description;
-
-    return updatedUser;
+    const updatedPoll = await Polls.findOne({ where: { id: poll.id } });
+    updatedPoll.title = poll.title || updatedPoll.title;
+    updatedPoll.description = poll.description || updatedPoll.description;
+    return updatedPoll;
   }
 };
