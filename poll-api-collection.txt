@@ -176,7 +176,81 @@
 		},
 		{
 			"name": "Polls",
-			"item": []
+			"item": [
+				{
+					"name": "Create poll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "BearerTokenTest",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"my poll title\",\n    \"description\":\"my poll description\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/polls/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"polls",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Polls list",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/polls/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"polls",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Polls details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Api handshake",

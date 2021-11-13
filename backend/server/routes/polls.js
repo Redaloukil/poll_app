@@ -1,5 +1,5 @@
 const express = require('express');
-const authenticated = require('../middlewares/authenticated');
+const { authenticated } = require('../middlewares/authenticated');
 const pollsController = require('../controllers/polls');
 
 const pollsRouter = express.Router();

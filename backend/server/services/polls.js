@@ -10,7 +10,7 @@ module.exports = {
     return poll;
   },
   createPoll: async ({ title, description, userId }) => {
-    const poll = await Polls.findOrCreate({
+    const poll = await Polls.create({
       title,
       description,
       user_id: userId

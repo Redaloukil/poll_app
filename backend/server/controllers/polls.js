@@ -5,8 +5,8 @@ module.exports = {
   getAllPolls: (req, res) =>
     catchAsyncError(req, res)(
       async (req, res) => {
-        const users = await pollsService.getAllUsers();
-        return res.status(200).json(users);
+        const polls = await pollsService.getAllPolls();
+        return res.status(200).json(polls);
       },
       () => (req, res) => {
         return res.status(404);
@@ -16,21 +16,21 @@ module.exports = {
     catchAsyncError(req, res)(
       async (req, res) => {
         const { id } = req.params;
-        const poll = await pollsService.getPollById({ id });
+        const poll = await pollsService.getPollById(id);
         return res.status(200).json(poll);
       },
       (req, res) => {
-        return res.status(404);
+        return res.status(404).json({ message: 'Ressource not found' });
       }
     ),
   createPoll: (req, res) =>
     catchAsyncError(req, res)(
       async (req, res) => {
         const { user } = req;
-        const { poll } = req.body;
+        const { title, description } = req.body;
         const createPoll = pollsService.createPoll({
-          title: poll.title,
-          description: poll.description,
+          title: title,
+          description: description,
           userId: user.id
         });
         return res.json(createPoll).status(201);
