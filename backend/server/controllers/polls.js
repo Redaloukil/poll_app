@@ -31,7 +31,7 @@ module.exports = {
       async (req, res) => {
         const { user } = req;
         const { title, description } = req.body;
-        const createPoll = pollsService.createPoll({
+        const createPoll = await pollsService.createPoll({
           title: title,
           description: description,
           userId: user.id
