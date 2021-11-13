@@ -17,7 +17,10 @@ module.exports = {
       async (req, res) => {
         const { id } = req.params;
         const poll = await pollsService.getPollById(id);
-        return res.status(200).json(poll);
+        if (poll) {
+          return res.status(200).json(poll);
+        }
+        return res.status(404).json({ message: 'Ressource not found' });
       },
       (req, res) => {
         return res.status(404).json({ message: 'Ressource not found' });
