@@ -36,7 +36,27 @@ module.exports = {
         return res.json(createPoll).status(201);
       },
       (req, res) => {
-        return res.status(201).json({ message: 'error while creating poll' });
+        return res.status(201).json({ message: 'Error while creating poll' });
       }
-    )
+    ),
+  updatePoll: () => {
+    catchAsyncError()(
+      async (req, res) => {
+        const { id } = req.params;
+        const { title, description } = req.body;
+
+        const poll = await pollsService.getPollById(id);
+
+        poll.title = title || poll.title;
+        poll.description = description || poll.description;
+
+        await poll.save();
+
+        return res.status(200).json(poll);
+      },
+      (req, res) => {
+        return res.status(401).json({ message: '' });
+      }
+    );
+  }
 };

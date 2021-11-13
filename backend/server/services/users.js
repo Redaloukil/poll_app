@@ -20,10 +20,6 @@ module.exports = {
     }
     return null;
   },
-  deleteUserById: async id => {
-    await Users.destroy({ where: { id } });
-    return;
-  },
   updateUser: async user => {
     const updatedUser = await Users.findOne({ where: { id: user.id } });
     return updatedUser;
