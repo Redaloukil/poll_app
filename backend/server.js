@@ -1,9 +1,11 @@
 'use strict';
 require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const { router } = require('./server/routes');
 const database = require('./server/helpers/database');
+const passport = require('passport');
 const logger = require('./server/utils/logger');
 
 const port = process.env.PORT || 3000;
@@ -22,6 +24,8 @@ app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(passport.initialize());
 
 app.get('/api/test', function(req, res) {
   return res.status(200).json({ message: 'handshake succefully done' });
