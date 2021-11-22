@@ -1,5 +1,7 @@
 const { catchAsyncError } = require('../helpers/catchAsync');
 const pollsService = require('../services/polls');
+const choicesService = require('../services/choices');
+const polls = require('../services/polls');
 
 module.exports = {
   getAllPolls: (req, res) =>
@@ -21,6 +23,43 @@ module.exports = {
           return res.status(200).json(poll);
         }
         return res.status(404).json({ message: 'Ressource not found' });
+      },
+      (req, res) => {
+        return res.status(404).json({ message: 'Ressource not found' });
+      }
+    ),
+  getPollChoicesById: (req, res) =>
+    catchAsyncError(req, res)(
+      async (req, res) => {
+        const { id } = req.params;
+        const poll = await pollsService.getPollById(id);
+        const choices = await choicesService.getChoicesByPollId(id);
+        if (poll) {
+          return res.status(200).json({ poll, choices });
+        }
+        return res.status(404).json({ message: 'Ressource not found' });
+      },
+      (req, res) => {
+        return res.status(404).json({ message: 'Ressource not found' });
+      }
+    ),
+  createPollChoiceById: (req, res) =>
+    catchAsyncError(req, res)(
+      async (req, res) => {
+        const { id } = req.params;
+        const { user } = req;
+        const { title, description } = req.body;
+
+        const poll = await pollsService.getPollById(id);
+        if (!poll || poll.user_id !== user.id) {
+          return res.status(401).json({ message: 'Unauthorized request' });
+        }
+        const choice = await choicesService.createChoiceByPollId(poll.id, {
+          title,
+          description
+        });
+
+        return res.status(201).json({ poll, choice });
       },
       (req, res) => {
         return res.status(404).json({ message: 'Ressource not found' });

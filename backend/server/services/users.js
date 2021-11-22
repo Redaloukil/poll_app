@@ -21,7 +21,7 @@ module.exports = {
     return null;
   },
   updateUser: async user => {
-    const updatedUser = await Users.findOne({ where: { id: user.id } });
-    return updatedUser;
+    await Users.destroy({ where: { id: user.id } });
+    return;
   }
 };

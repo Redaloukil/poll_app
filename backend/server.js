@@ -32,4 +32,8 @@ app.get('/api/test', function(req, res) {
 
 app.use('/api/v1', router);
 
+app.use('*', (req, res) => {
+  return res.status(404).json({ message: 'Ressource not found' });
+});
+
 app.listen(port);
