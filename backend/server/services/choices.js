@@ -6,7 +6,7 @@ module.exports = {
     return choices;
   },
   getChoicesByPollId: async pollId => {
-    const choices = await Choices.findAll({ where: { id: pollId } });
+    const choices = await Choices.findAll({ where: { poll_id: pollId } });
     return choices;
   },
   createChoiceByPollId: async (pollId, choice) => {

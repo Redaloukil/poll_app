@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "users",
+			"name": "Users",
 			"item": [
 				{
 					"name": "Users list",
@@ -96,7 +96,9 @@
 								"exec": [
 									"pm.test('User signup with correct credentials', () => {",
 									"    pm.response.to.have.status(201);",
-									"});"
+									"});",
+									"",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -131,9 +133,6 @@
 				},
 				{
 					"name": "Users details",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -145,7 +144,7 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "formdata",
@@ -171,6 +170,26 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -246,6 +265,146 @@
 						"header": [],
 						"url": {
 							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update poll",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/polls/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"polls",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Choices",
+			"item": [
+				{
+					"name": "Choices list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/choices/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"choices",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Choices By Polls Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/polls/:id/choices",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"polls",
+								":id",
+								"choices"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Choice By Poll Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"win\",\n    \"description\":\"I prefer to win this game of truth\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/polls/1/choices/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"polls",
+								"1",
+								"choices",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Choice By Poll Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/choices/polls/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"choices",
+								"polls",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
 						}
 					},
 					"response": []
