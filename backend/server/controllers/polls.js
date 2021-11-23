@@ -1,7 +1,6 @@
 const { catchAsyncError } = require('../helpers/catchAsync');
 const pollsService = require('../services/polls');
 const choicesService = require('../services/choices');
-const polls = require('../services/polls');
 
 module.exports = {
   getAllPolls: (req, res) =>

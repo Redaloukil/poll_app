@@ -27,7 +27,6 @@ module.exports = {
     catchAsyncError(req, res)(
       async (req, res) => {
         const user = req.body;
-        console.log(user);
         const createdUser = await usersService.createUser(user);
         if (createdUser) {
           return res.status(201).json(createdUser);
